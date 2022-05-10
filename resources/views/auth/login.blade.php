@@ -17,9 +17,11 @@
             </div>
             <div class="bg-[#1E3A4C] h-3/6 px-16 py-10 rounded-3xl xl:ml-20 xl:w-3/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                 <div class="flex items-center justify-center text-3xl uppercase font-bold mb-10">
-                    <h1 class="text-white">
-                        {{ __("Babybook") }}
-                    </h1>
+                    <img
+                        src="../img/logo.svg"
+                        class="w-6/12"
+                        alt="Sample image"
+                    />
                 </div>
 
                 <x-header/>

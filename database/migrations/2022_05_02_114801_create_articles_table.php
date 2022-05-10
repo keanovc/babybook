@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('title');
             $table->string('image');
+            $table->string('price');
+            $table->string('url');
             $table->timestamp('scraped_on')->useCurrent();
             $table->timestamps();
         });

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('shop');
             $table->string('title');
             $table->string('url');
             $table->timestamps();

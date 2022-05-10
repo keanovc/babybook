@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
@@ -23,9 +24,29 @@ class AdminController extends Controller
 
     public function show(Request $request)
     {
-        $articles = Article::all();
+        $shops = [
+            'babyplanet' => 'Baby Planet',
+            'bollebuik' => 'Bollebuik',
+            'dekinderplaneet' => 'De Kinder Planeet',
+        ];
 
-        return view('adminDashboard', compact('articles'));
+        if ($request->shop) {
+            $currentShopSmall = $request->shop;
+        } else {
+            $currentShopSmall = 'babyplanet';
+        }
+
+        $categories = Category::where('shop', $currentShopSmall)->get();
+        $currentShop = $shops[$currentShopSmall];
+
+        unset($shops[$currentShopSmall]);
+
+        $articles = Article::join('categories', 'articles.category_id', '=', 'categories.id')
+            ->where('categories.shop', $currentShopSmall)
+            ->select('articles.*', 'categories.title as category_title')
+            ->get();
+
+        return view('adminDashboard', compact('articles', 'shops', 'currentShop'));
     }
 
     /**

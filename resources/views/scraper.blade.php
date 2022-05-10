@@ -61,17 +61,41 @@
                                 <th scope="col" class="px-6 py-3">
                                     {{ __('Categories') }}
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Scrape</span>
+                                <th scope="col" class="p-6 w-4/12">
+                                    <div class="w-full">
+                                        <form action="{{ route('scraper.show') }}" method="GET">
+                                            <select onchange="this.form.submit()" required name="shop" id="shop" class="form-select appearance-none
+                                            block
+                                            w-full
+                                            px-3
+                                            py-1.5
+                                            text-base
+                                            font-normal
+                                            text-gray-700
+                                            bg-white bg-clip-padding bg-no-repeat
+                                            border border-solid border-gray-300
+                                            rounded
+                                            transition
+                                            ease-in-out
+                                            m-0
+                                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                                <option value="">{{ $currentShop }}</option>
+                                                <hr>
+                                                @foreach ($shops as $key => $shop)
+                                                    <option value="{{ $key }}">{{ $shop }}</option>
+                                                @endforeach
+                                            </select>
+                                        </form>
+                                    </div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($flamingoCategories as $category)
+                            @foreach ($categories as $category)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                         <div class="text-sm leading-5 font-medium text-gray-200">
-                                            {{ $category->title }}
+                                            <a href="{{ $category->url }}" target="_blank">{{ $category->title }}</a>
                                         </div>
                                     </th>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-right">
@@ -79,9 +103,9 @@
                                             <form action="{{ route('scraper.articles') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="url" value="{{ $category->url }}">
-                                                <input type="hidden" name="shop" value="flamingo">
-                                                <button class="bg-blue-500 text-white font-bold py-2 px-4 mt-4 rounded" type="submit">
-                                                    {{ __('Scrape all articles') }}
+                                                <input type="hidden" name="shop" value="{{ $category->shop }}">
+                                                <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="submit">
+                                                    {{ __('Articles') }}
                                                 </button>
                                             </form>
                                         </div>

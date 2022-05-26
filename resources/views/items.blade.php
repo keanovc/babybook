@@ -12,8 +12,8 @@
                 <button onclick="event.preventDefault();
                 this.closest('form').submit();" class="h-6 text-[#1E3A4C]"> {{ __('Logout') }} </button>
             </form>
-            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">Reserved</h1>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">Items</h1>
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('reserved')">
                 Lists
             </x-nav-link>
         </div>
@@ -22,7 +22,7 @@
     <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
 
     <div class="mt-5 text-[#1E3A4C]">
-        <div class="w-11/12 mt-10 mx-auto">
+        {{-- <div class="w-11/12 lg:w-2/12 mt-10 mx-auto">
             <div class="flex justify-between bg-white rounded-[12px] overflow-hidden h-auto lg:h-32 border shadow-lg">
               <div class="flex">
                 <img class="block object-cover h-24 w-6/12 flex-none bg-cover" src="https://www.petiteamelie.be/media/catalog/product/cache/10/thumbnail/1024x/85e4522595efc69f496374d01ef2bf13/d/o/doorgroei-babybed-cerise-wit-hout-petite-amelie.jpg">
@@ -31,7 +31,17 @@
                   <p class="text-base">€125.99</p>
                 </div>
               </div>
+              <div class="flex items-center mr-5 text-red-500">
+                DEL
+              </div>
             </div>
-        </div>
+        </div> --}}
+        <form method="GET" action="{{ route('additems', $listId) }}">
+            <button type="submit" class="w-full"><div class="w-11/12 lg:w-2/12 mt-5 mx-auto">
+                <div class="flex justify-center items-center bg-white rounded-[12px] overflow-hidden h-24 lg:h-32 border shadow-lg">
+                    <p class="text-grey-darker text-lg font-bold">+ add items</p>
+                </div>
+            </div></button>
+        </form>
     </div>
 </x-app-layout>

@@ -209,7 +209,6 @@ class ScraperController extends Controller
             $article->price = $node->filter('div > .product-item-details > .product-item-inner > .price-box span.price')->first()->text();
             $article->price = str_replace('.', '', $article->price);
             $article->price = str_replace(',', '.', $article->price);
-            dd($article->price);
             $article->url = $node->filter('div > div > strong > a')->first()->attr('href');
             return $article;
         });

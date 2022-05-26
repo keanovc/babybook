@@ -9,12 +9,12 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
-                <x-simpleline-logout onclick="event.preventDefault();
-                this.closest('form').submit();" class="h-6 text-[#1E3A4C]"/>
+                <button onclick="event.preventDefault();
+                this.closest('form').submit();" class="h-6 text-[#1E3A4C]"/> {{ __('LOGOUT') }} </button>
             </form>
             <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">ADD ITEMS</h1>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                <p class="text-3xl">x</p>
+            <x-nav-link :href="route('items')" :active="request()->routeIs('dashboard')">
+                Close
             </x-nav-link>
         </div>
     </header>
@@ -63,67 +63,33 @@
                             {{ floor(($highestPrice + $lowestPrice) / 2) }}
                         @endif
                     }">
-                        <label for="price" class="font-bold uppercase text-gray-700" x-text="`Prijs €` + price"></label>
+                        <label for="price" class="font-bold uppercase text-gray-700" x-text="`Price €` + price"></label>
                         <input onchange="this.form.submit()" type="range" min="{{ $lowestPrice }}" name="price" max="{{ $highestPrice }}" x-model="price"
                           class="w-full h-2 bg-blue-100 appearance-none" />
                     </div>
                 </form>
             </div>
         </div>
-        <form action="{{ route('additems.store') }}" method="POST">
+        <form action="{{ route('additems.store', $list) }}" method="POST">
             @csrf
-            {{-- <div class="flex flex-wrap mt-10">
-                <div class="w-full px-3">
-                    <label class="block font-bold uppercase text-gray-700 tracking-wide mb-2">
-                        {{ __('Article') }}
-                    </label>
-                    <select required name="article" class="form-select appearance-none
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding bg-no-repeat
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                        @foreach ($articlesWithPriceBelowHighest as $article)
-                            <img src="../../../img/{{ $article->image }}" alt="{{ $article->title }}">
-                            <option value="{{ $article->id }}">{{ $article->title }} - € {{ $article->price }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div> --}}
 
-            <div class="overflow-y-auto h-80 mt-10 w-11/12 mx-auto text-[#1E3A4C] bg-white border rounded-[12px]">
+            <div class="w-11/12 mx-auto">
                 @foreach ($articlesWithPriceBelowHighest as $article)
-                    <div class="flex items-center">
-                        <input class="form-check-input hidden peer appearance-none h-4 w-4 mx-3 border border-gray-300 accent-gray-600 rounded-full bg-white checked:bg-gray-600 checked:border-gray-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="{{ $article->title }}">
-                        <label for="{{ $article->title }}" class="peer-checked:bg-[#9EC4C5]">
-                            <div class="flex justify-between ml-5 overflow-hidden h-auto lg:h-32">
-                                <div class="flex items-center">
-                                    <img class="block object-cover h-16 w-3/12 flex-none bg-cover" src="../../../img/{{ $article->image }}" alt="{{ $article->title }}">
-                                    <div class="ml-2 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                                        <div class="font-bold text-md mb-2 leading-tight">{{ $article->title }}</div>
-                                        <p class="text-base">€ {{ $article->price }}</p>
-                                    </div>
-                                </div>
+                    <form method="POST" action="{{ route('additems.store', $listId) }}">
+                        <div class="w-full max-w-sm mx-auto my-10 rounded-md shadow-md overflow-hidden">
+                            <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')">
+                                <button class="py-2 px-4 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500" type="submit">
+                                    <p class="text-2xl">+</p>
+                                </button>
                             </div>
-                        </label>
-                    </div>
+                            <div class="px-5 py-3">
+                                <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>
+                                <span class="text-gray-500 mt-2">€ {{ $article->price }}</span>
+                            </div>
+                        </div>
+                    </form>
                     <hr>
                 @endforeach
-            </div>
-
-            <div class="flex justify-center">
-                <button class="bg-[#9EC4C5] absolute bottom-10 xl:relative xl:bottom-0 xl:mt-20 w-8/12 lg:w-6/12 text-white font-bold py-2 px-4 rounded" type="submit">
-                    {{ __('Add Items') }}
-                </button>
             </div>
         </form>
     </div>

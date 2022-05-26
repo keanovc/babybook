@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('babylists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('article_id');
-            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->string('description');
+            $table->string('invitation_code');
             $table->timestamps();
         });
     }

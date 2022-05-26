@@ -18,7 +18,7 @@
                 alt="Sample image"
             />
             </div>
-            <div class="bg-[#1E3A4C] h-3/6 px-16 py-10 rounded-3xl w-10/12 xl:ml-20 xl:w-3/12 lg:w-5/12 md:w-10/12 mb-12 md:mb-0">
+            <div class="bg-[#1E3A4C] h-auto px-16 py-10 rounded-3xl w-10/12 xl:ml-20 xl:w-3/12 lg:w-5/12 md:w-10/12 mb-12 md:mb-0">
                 <div class="flex items-center justify-center text-3xl uppercase font-bold mb-20 xl:mb-10">
                     <img
                         src="../img/logo.svg"

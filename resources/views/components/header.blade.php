@@ -20,13 +20,6 @@
                     <hr class="w-48 xl:w-28 border-gray-500 {{ (request()->is('register')) ? 'border-[#F3C2C2]' : '' }}">
                 </div>
             @endif
-
-            @if (Route::has('admin'))
-                <div class="flex flex-col">
-                    <a href="{{ route('admin') }}" class="text-4xl xl:text-xl ml-1 mb-1 text-gray-500 {{ (request()->is('admin')) ? 'text-white' : '' }}">Admin</a>
-                    <hr class="w-48 xl:w-28 border-gray-500 {{ (request()->is('admin')) ? 'border-[#F3C2C2]' : '' }}">
-                </div>
-            @endif
         @endauth
     </div>
 @endif

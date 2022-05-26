@@ -24,11 +24,12 @@ class BabylistController extends Controller
         return view('reserved');
     }
 
-    public function items(Request $request)
+    public function items(Request $request, $list)
     {
-        $listId = $request->route('list');
+        $list = Babylist::find($list);
+        $articles = Article::whereIn('id', json_decode($list->articles))->get();
 
-        return view('items', compact('listId'));
+        return view('items', compact('list', 'articles'));
     }
 
     public function addlist(Request $request)
@@ -36,10 +37,8 @@ class BabylistController extends Controller
         return view('addlist');
     }
 
-    public function additems(Request $request, Babylist $list)
+    public function additems(Request $request, $list)
     {
-        $listId = $request->route('list');
-
         $categories = Category::all();
 
         // check which category has articles
@@ -86,12 +85,9 @@ class BabylistController extends Controller
             } elseif ($article->price <= floor(($highestPrice + $lowestPrice) / 2)) {
                 $articlesWithPriceBelowHighest[] = $article;
             }
-        }
+        };
 
-        $user = $request->user();
-        $list = $user->lists()->find($list);
-
-        return view('additems', compact('categoriesWithArticles', 'articlesWithPriceBelowHighest', 'currentCategoryTitle', 'currentCategoryShop', 'highestPrice', 'currentPrice', 'lowestPrice', 'listId'));
+        return view('additems', compact('categoriesWithArticles', 'articlesWithPriceBelowHighest', 'currentCategoryTitle', 'currentCategoryShop', 'highestPrice', 'currentPrice', 'lowestPrice', 'list'));
     }
 
     public function storeList(Request $request)
@@ -101,6 +97,7 @@ class BabylistController extends Controller
         $babylist->description = $request->description;
         $babylist->invitation_code = $request->invite;
         $babylist->user_id = $request->user()->id;
+        $babylist->articles = json_encode([]);
         $babylist->save();
 
         return redirect()->route('dashboard')->with('success', 'List created');
@@ -108,19 +105,27 @@ class BabylistController extends Controller
 
     public function storeItems(Request $request)
     {
-        $listId = $request->route('list');
-        $user = $request->user();
-        $list = $user->lists()->find($listId);
+        $list = $request->list;
+        $listTotal = Babylist::find($request->list);
+        $articles = json_decode($listTotal->articles, true);
+        $articles[] = $request->article;
+        $listTotal->articles = json_encode($articles);
+        $listTotal->save();
 
-        dd($list);
 
-        return redirect()->route('items')->with('success', 'Items added');
+        return redirect()->route('additems', $list)->with('success', 'Article added');
     }
 
     public function guestlist (Request $request) {
         $invitationCode = $request->invitation_code;
         $list = Babylist::where('invitation_code', $invitationCode)->first();
 
-        return view('guestlist', compact('list'));
+        if ($list) {
+            $articles = Article::whereIn('id', json_decode($list->articles))->get();
+
+            return view('guestlist', compact('list', 'articles'));
+        } else {
+            return redirect()->route('invitation')->with('error', 'Invalid invitation code');
+        }
     }
 }

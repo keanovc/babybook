@@ -13,7 +13,7 @@
                 this.closest('form').submit();" class="h-6 text-[#1E3A4C]"/> {{ __('LOGOUT') }} </button>
             </form>
             <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">ADD ITEMS</h1>
-            <x-nav-link :href="route('items')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('items', $list)" :active="request()->routeIs('dashboard')">
                 Close
             </x-nav-link>
         </div>
@@ -27,7 +27,7 @@
             <label class="block font-bold uppercase text-gray-700 tracking-wide mb-2">
                 {{ __('Category') }}
             </label>
-            <form action="{{ route('additems') }}" method="GET">
+            <form action="{{ route('additems', $list) }}" method="GET">
                 <select onchange="this.form.submit()" required name="category" class="form-select appearance-none
                 block
                 w-full
@@ -55,7 +55,7 @@
         </div>
         <div class="flex flex-wrap mt-10">
             <div class="w-full px-3">
-                <form action="{{ route('additems') }}" method="GET">
+                <form action="{{ route('additems', $list) }}" method="GET">
                     <div x-data="{ price:
                         @if (isset($currentPrice))
                             {{ $currentPrice }}
@@ -70,27 +70,27 @@
                 </form>
             </div>
         </div>
-        <form action="{{ route('additems.store', $list) }}" method="POST">
-            @csrf
+        <div class="w-11/12 mx-auto">
+            @foreach ($articlesWithPriceBelowHighest as $article)
+                <div class="w-full max-w-sm mx-auto my-10 rounded-md shadow-md overflow-hidden">
+                    <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')">
+                        <form method="POST" action="{{ route('additems.store', $article) }}">
+                        @csrf
 
-            <div class="w-11/12 mx-auto">
-                @foreach ($articlesWithPriceBelowHighest as $article)
-                    <form method="POST" action="{{ route('additems.store', $listId) }}">
-                        <div class="w-full max-w-sm mx-auto my-10 rounded-md shadow-md overflow-hidden">
-                            <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')">
-                                <button class="py-2 px-4 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500" type="submit">
-                                    <p class="text-2xl">+</p>
-                                </button>
-                            </div>
-                            <div class="px-5 py-3">
-                                <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>
-                                <span class="text-gray-500 mt-2">€ {{ $article->price }}</span>
-                            </div>
-                        </div>
-                    </form>
-                    <hr>
-                @endforeach
-            </div>
-        </form>
+                            <input type="hidden" name="list" value="{{ $list }}">
+                            <input type="hidden" name="article" value="{{ $article->id }}">
+                            <button class="py-2 px-4 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500" type="submit">
+                                <p class="text-2xl">+</p>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="px-5 py-3">
+                        <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>
+                        <span class="text-gray-500 mt-2">€ {{ $article->price }}</span>
+                    </div>
+                </div>
+                <hr>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>

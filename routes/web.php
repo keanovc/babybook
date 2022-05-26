@@ -20,7 +20,7 @@ Route::get('/reserved', [Babylist\BabylistController::class, 'reserved'])->middl
 
 Route::get('/invitation', function () {
     return view('invitation');
-});
+})->name('invitation');
 Route::post('/invitation', [Babylist\BabylistController::class, 'guestlist'])->name('guestlist');
 
 Route::get('/adminDashboard', [Auth\AdminController::class, 'show'])->middleware(['auth'])->name('adminDashboard');

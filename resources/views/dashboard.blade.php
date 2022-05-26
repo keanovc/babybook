@@ -28,26 +28,22 @@
 
     @foreach ($lists as $list)
         <div class="mt-5 text-[#1E3A4C]">
-            <form method="GET" action="{{ route('items', $list->id) }}">
-                @csrf
-
-                <button type="submit" class="w-full"><div class="w-11/12 lg:w-2/12 mx-auto transition duration-300 hover:scale-105">
-                    <div class="flex items-center justify-between bg-white rounded-[12px] overflow-hidden h-24 lg:h-32 border shadow-md">
-                        <div class="flex">
-                            <div class="w-2/12 mx-5">
-                                <img class="rounded-full" src="https://t3.ftcdn.net/jpg/01/28/56/34/360_F_128563455_bGrVZnfDCL0PxH1sU33NpOhGcCc1M7qo.jpg" alt="baby">
-                            </div>
-                            <div class="text-left">
-                                <p class="text-grey-darker text-lg font-bold uppercase">{{ $list->name }}</p>
-                                <p class="text-grey-darker text-lg">{{ $list->description }}</p>
-                            </div>
+            <a href="{{ route('items', $list) }}" class="w-full"><div class="w-11/12 lg:w-2/12 mx-auto transition duration-300 hover:scale-105">
+                <div class="flex items-center justify-between bg-white rounded-[12px] overflow-hidden h-24 lg:h-32 border shadow-md">
+                    <div class="flex">
+                        <div class="w-2/12 mx-5">
+                            <img class="rounded-full" src="https://t3.ftcdn.net/jpg/01/28/56/34/360_F_128563455_bGrVZnfDCL0PxH1sU33NpOhGcCc1M7qo.jpg" alt="baby">
                         </div>
-                        <div class="mx-5">
-                            <p class="text-red-500">X</p>
+                        <div class="text-left">
+                            <p class="text-grey-darker text-lg font-bold uppercase">{{ $list->name }}</p>
+                            <p class="text-grey-darker text-lg">{{ $list->description }}</p>
                         </div>
                     </div>
-                </div></button>
-            </form>
+                    <div class="mx-5">
+                        <p class="text-red-500">X</p>
+                    </div>
+                </div>
+            </div></a>
         </div>
     @endforeach
 </x-app-layout>

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Article;
 use App\Models\Babylist;
 use App\Models\User;
+use App\Models\Order;
 
 class BabylistController extends Controller
 {
@@ -19,9 +20,13 @@ class BabylistController extends Controller
         return view('dashboard', compact('lists'));
     }
 
-    public function reserved(Request $request)
+    public function reserved(Request $request, $list)
     {
-        return view('reserved');
+        $order = Order::where('list_id', $list)->first();
+        $reservedArticles = json_decode($order->reserved_articles);
+        $articles = Article::whereIn('id', $reservedArticles)->get();
+
+        return view('reserved', compact('list', 'articles', 'order'));
     }
 
     public function items(Request $request, $list)
@@ -116,16 +121,14 @@ class BabylistController extends Controller
         return redirect()->route('additems', $list)->with('success', 'Article added');
     }
 
-    public function guestlist (Request $request) {
-        $invitationCode = $request->invitation_code;
-        $list = Babylist::where('invitation_code', $invitationCode)->first();
-
-        if ($list) {
-            $articles = Article::whereIn('id', json_decode($list->articles))->get();
-
-            return view('guestlist', compact('list', 'articles'));
-        } else {
-            return redirect()->route('invitation')->with('error', 'Invalid invitation code');
-        }
+    public function removeItems(Request $request, $list)
+    {
+        dd($request->all());
+        $listTotal = Babylist::find($request->list);
+        $articles = json_decode($listTotal->articles, true);
+        $articles = array_diff($articles, [$request->article]);
+        $listTotal->articles = json_encode($articles);
+        $listTotal->save();
+        return redirect()->route('items', $list)->with('success', 'Article removed');
     }
 }

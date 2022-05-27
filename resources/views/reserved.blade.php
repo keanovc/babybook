@@ -13,25 +13,28 @@
                 this.closest('form').submit();" class="h-6 text-[#1E3A4C]"> {{ __('Logout') }} </button>
             </form>
             <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">Reserved</h1>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Lists
+            <x-nav-link :href="route('items', $list)" :active="request()->routeIs('items')">
+                Items
             </x-nav-link>
         </div>
     </header>
 
     <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
 
-    <div class="mt-5 text-[#1E3A4C]">
-        <div class="w-11/12 mt-10 mx-auto">
-            <div class="flex justify-between bg-white rounded-[12px] overflow-hidden h-auto lg:h-32 border shadow-lg">
-              <div class="flex">
-                <img class="block object-cover h-24 w-6/12 flex-none bg-cover" src="https://www.petiteamelie.be/media/catalog/product/cache/10/thumbnail/1024x/85e4522595efc69f496374d01ef2bf13/d/o/doorgroei-babybed-cerise-wit-hout-petite-amelie.jpg">
-                <div class="bg-white ml-2 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                  <div class="font-bold text-xl mb-2 leading-tight">Babybed</div>
-                  <p class="text-base">€125.99</p>
+    <div class="mt-10 text-[#1E3A4C]">
+        @if (count($articles) > 0)
+            @foreach ($articles as $article)
+                <div class="w-11/12 max-w-sm mx-auto rounded-[12px] overflow-hidden mt-5 border shadow-lg">
+                    <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../img/{{ $article->image }}')"></div>
+                    <div class="px-5 py-3">
+                        <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>
+                        <span class="text-gray-500 mt-2">€{{ $article->price }}</span>
+                        <p class="text-gray-500 mt-2">Person: {{ $order->name }}</p>
+                    </div>
                 </div>
-              </div>
-            </div>
-        </div>
+            @endforeach
+        @else
+            <p class="text-center text-gray-500">No items yet</p>
+        @endif
     </div>
 </x-app-layout>

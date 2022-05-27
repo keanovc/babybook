@@ -6,15 +6,18 @@
 
     <header class="mt-6">
         <div class="flex justify-between items-center w-10/12 m-auto">
+            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">Items</h1>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
                 <button onclick="event.preventDefault();
                 this.closest('form').submit();" class="h-6 text-[#1E3A4C]"> {{ __('Logout') }} </button>
             </form>
-            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">Items</h1>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('reserved')">
+            <x-nav-link :href="route('dashboard')">
                 Lists
+            </x-nav-link>
+            <x-nav-link :href="route('reserved', $list)">
+                Reserved
             </x-nav-link>
         </div>
     </header>
@@ -30,9 +33,12 @@
         @foreach ($articles as $article)
             <div class="w-11/12 max-w-sm mx-auto rounded-[12px] overflow-hidden mt-5 border shadow-lg">
                 <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../img/{{ $article->image }}')">
-                    <button class="px-3 py-1 rounded-full bg-red-500 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                        <p class="text-2xl text-white">x</p>
-                    </button>
+                    <form action="{{ route('items.delete', $list) }}" method="DELETE">
+
+                        <button type="submit" class="px-3 py-1 rounded-full bg-red-500 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                            <p class="text-2xl text-white">x</p>
+                        </button>
+                    </form>
                 </div>
                 <div class="px-5 py-3">
                     <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>

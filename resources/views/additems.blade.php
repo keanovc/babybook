@@ -22,40 +22,38 @@
     <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
 
     <div class="mt-10 mx-auto w-10/12 xl:w-3/12 lg:w-3/12 lg:bg-white lg:rounded lg:p-10 lg:shadow-md lg:mt-20">
-        <div class="flex flex-wrap">
-            <div class="w-full px-3">
-            <label class="block font-bold uppercase text-gray-700 tracking-wide mb-2">
-                {{ __('Category') }}
-            </label>
-            <form action="{{ route('additems', $list) }}" method="GET">
-                <select onchange="this.form.submit()" required name="category" class="form-select appearance-none
-                block
-                w-full
-                px-3
-                py-1.5
-                text-base
-                font-normal
-                text-gray-700
-                bg-white bg-clip-padding bg-no-repeat
-                border border-solid border-gray-300
-                rounded
-                transition
-                ease-in-out
-                m-0
-                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                    <option value="">{{ $currentCategoryTitle }} - {{ $currentCategoryShop }}</option>
-                    @foreach ($categoriesWithArticles as $category)
-                        <option value="{{ $category->id }}">
-                            {{ $category->title }} - {{ $category->shop }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
+        <form action="{{ route('additems', $list) }}" method="GET">
+            <div class="flex flex-wrap">
+                <div class="w-full px-3">
+                    <label class="block font-bold uppercase text-gray-700 tracking-wide mb-2">
+                        {{ __('Category') }}
+                    </label>
+                    <select name="category" class="form-select appearance-none
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding bg-no-repeat
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                        <option value="">{{ $currentCategoryTitle }} - {{ $currentCategoryShop }}</option>
+                        @foreach ($categoriesWithArticles as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->title }} - {{ $category->shop }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="flex flex-wrap mt-10">
-            <div class="w-full px-3">
-                <form action="{{ route('additems', $list) }}" method="GET">
+            <div class="flex flex-wrap mt-10">
+                <div class="w-full px-3">
                     <div x-data="{ price:
                         @if (isset($currentPrice))
                             {{ $currentPrice }}
@@ -64,18 +62,22 @@
                         @endif
                     }">
                         <label for="price" class="font-bold uppercase text-gray-700" x-text="`Price €` + price"></label>
-                        <input onchange="this.form.submit()" type="range" min="{{ $lowestPrice }}" name="price" max="{{ $highestPrice }}" x-model="price"
-                          class="w-full h-2 bg-blue-100 appearance-none" />
+                        <input type="range" min="{{ $lowestPrice }}" name="price" max="{{ $highestPrice }}" x-model="price"
+                        class="w-full h-2 bg-blue-100 appearance-none" />
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+            <button class="block w-11/12 mt-10 mx-auto p-3 text-sm rounded-lg bg-blue-500 text-stone-100 hover:bg-stone-500" type="submit">
+                Search
+            </button>
+        </form>
+        <hr class="w-11/12 mt-10 mx-auto border-[#1E3A4C]">
         <div class="w-11/12 mx-auto">
             @foreach ($articlesWithPriceBelowHighest as $article)
                 <div class="w-full max-w-sm mx-auto my-10 rounded-md shadow-md overflow-hidden">
                     <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')">
                         <form method="POST" action="{{ route('additems.store', $article) }}">
-                        @csrf
+                            @csrf
 
                             <input type="hidden" name="list" value="{{ $list }}">
                             <input type="hidden" name="article" value="{{ $article->id }}">

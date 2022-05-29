@@ -10,6 +10,7 @@ use App\Models\Babylist;
 use App\Models\User;
 use App\Models\Order;
 
+
 class BabylistController extends Controller
 {
     public function __invoke(Request $request)
@@ -20,21 +21,21 @@ class BabylistController extends Controller
         return view('dashboard', compact('lists'));
     }
 
-    public function reserved(Request $request, $list)
-    {
-        $order = Order::where('list_id', $list)->first();
-        $reservedArticles = json_decode($order->reserved_articles);
-        $articles = Article::whereIn('id', $reservedArticles)->get();
-
-        return view('reserved', compact('list', 'articles', 'order'));
-    }
-
     public function items(Request $request, $list)
     {
         $list = Babylist::find($list);
         $articles = Article::whereIn('id', json_decode($list->articles))->get();
 
-        return view('items', compact('list', 'articles'));
+        $orders = Order::where('list_id', $list->id)->get();
+        $reservedArticles = [];
+        foreach ($orders as $order) {
+            $reservedArticles = array_merge($reservedArticles, json_decode($order->reserved_articles));
+        }
+        $reservedArticles = Article::whereIn('id', $reservedArticles)->get();
+        $articles = $articles->diff($reservedArticles);
+
+
+        return view('items', compact('list', 'articles', 'reservedArticles'));
     }
 
     public function addlist(Request $request)
@@ -99,6 +100,7 @@ class BabylistController extends Controller
     {
         $babylist = new Babylist;
         $babylist->name = $request->name;
+        $babylist->gender = $request->gender;
         $babylist->description = $request->description;
         $babylist->invitation_code = $request->invite;
         $babylist->user_id = $request->user()->id;
@@ -130,5 +132,19 @@ class BabylistController extends Controller
         $listTotal->articles = json_encode($articles);
         $listTotal->save();
         return redirect()->route('items', $list)->with('success', 'Article removed');
+    }
+
+    public function orders (Request $request, $list) {
+        $orders = Order::where('list_id', $list)->get();
+
+        return view('orders', compact('orders', 'list'));
+    }
+
+    public function reserved(Request $request, $list, $order) {
+        $order = Order::find($order);
+        $articles = json_decode($order->reserved_articles);
+        $articles = Article::whereIn('id', $articles)->get();
+
+        return view('reserved', compact('articles', 'list', 'order'));
     }
 }

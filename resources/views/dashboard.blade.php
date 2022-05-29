@@ -1,49 +1,68 @@
-<x-app-layout>
-    <svg class="lg:hidden" width="390" height="74" viewBox="0 0 390 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M179.5 46C132.364 36.2406 -8.50609 29.3876 -55 23.5L-28.5047 -25H458.932C462.264 12.0698 376.496 70.4066 344.5 72.5C304.505 75.1167 293 69.5 179.5 46Z" fill="#9EC4C5"/>
-        <path d="M219.429 -15.1767C98.7047 -7.31814 3.5079 25.5488 -29 41L1.79696 -25H203.004C258.78 -25 340.153 -23.0353 219.429 -15.1767Z" fill="#F3C2C2"/>
-    </svg>
+<x-guest-layout>
+    <x-slot name="header">
+        <div class="px-7 bg-white shadow-lg rounded-t-2xl">
+            <div class="flex">
+                <div class="flex-1 group">
+                    <a href="#" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-indigo-500 group-hover:text-indigo-500">
+                        <span class="block px-1 pt-1 pb-1">
+                            <span class="material-symbols-outlined">
+                                list_alt
+                            </span>
+                            <span class="block text-xs pb-2">Lists</span>
+                            <span class="block w-5 mx-auto h-1 bg-indigo-500 group-hover:bg-indigo-500 rounded-full"></span>
+                        </span>
+                    </a>
+                </div>
+                <div class="flex-1 group">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-    <header class="pt-6">
-        <div class="flex justify-between items-center w-10/12 m-auto">
-            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">Lists</h1>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button onclick="event.preventDefault();
-                this.closest('form').submit();" class="h-6 text-[#1E3A4C]"> {{ __('LOGOUT') }} </button>
-            </form>
+                        <button onclick="event.preventDefault(); this.closest('form').submit();" type="button" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                            <span class="block px-1 pt-1 pb-1">
+                                <span class="material-symbols-outlined">
+                                    logout
+                                </span>
+                                <span class="block text-xs pb-2">Logout</span>
+                                <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </header>
+    </x-slot>
 
-    <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
-
-    <div class="mt-10 text-[#1E3A4C]">
-        <a href="/addlist"><div class="w-11/12 lg:w-2/12 mx-auto transition duration-300 hover:scale-105">
-            <div class="flex justify-center items-center bg-white rounded-[12px] overflow-hidden h-24 lg:h-32 border shadow-md">
+    <div class="pt-10 text-[#1E3A4C]">
+        <a href="{{ route('addlist') }}"><div class="w-10/12 lg:w-2/12 mx-auto transition duration-300 hover:scale-105">
+            <div class="flex justify-center items-center bg-white rounded-lg overflow-hidden h-24 lg:h-32 border shadow-md">
                 <p class="text-grey-darker text-lg font-bold">+ add birth list</p>
             </div>
         </div></a>
     </div>
 
     @foreach ($lists as $list)
-        <div class="mt-5 text-[#1E3A4C]">
-            <a href="{{ route('items', $list) }}" class="w-full"><div class="w-11/12 lg:w-2/12 mx-auto transition duration-300 hover:scale-105">
-                <div class="flex items-center justify-between bg-white rounded-[12px] overflow-hidden h-24 lg:h-32 border shadow-md">
-                    <div class="flex">
-                        <div class="w-2/12 mx-5">
-                            <img class="rounded-full" src="https://t3.ftcdn.net/jpg/01/28/56/34/360_F_128563455_bGrVZnfDCL0PxH1sU33NpOhGcCc1M7qo.jpg" alt="baby">
-                        </div>
-                        <div class="text-left">
-                            <p class="text-grey-darker text-lg font-bold uppercase">{{ $list->name }}</p>
-                            <p class="text-grey-darker text-lg">{{ $list->description }}</p>
-                        </div>
-                    </div>
-                    <div class="mx-5">
-                        <p class="text-red-500">X</p>
-                    </div>
-                </div>
-            </div></a>
+        <div class="mt-5 py-5 bg-white font-semibold text-center rounded-lg border shadow-lg w-10/12 lg:w-2/12 mx-auto">
+            <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="https://t3.ftcdn.net/jpg/01/28/56/34/360_F_128563455_bGrVZnfDCL0PxH1sU33NpOhGcCc1M7qo.jpg" alt="baby">
+            <h1 class="text-xl text-gray-700"> {{ $list->name }} </h1>
+            <h3 class="text-sm text-gray-400 "> {{ $list->description }} </h3>
+            <p class="text-sm text-gray-400 mt-4"> Invite: {{ $list->invitation_code }} </p>
+            <div class="py-5 flex justify-center items-center">
+                <a href="{{ route('items', $list) }}" class="bg-indigo-600 px-4 py-2 mx-2 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide flex items-center justify-center">
+                    <span class="material-symbols-outlined">
+                        visibility
+                    </span>
+                </a>
+                <a href="{{ route('dashboard.copy') }}" class="bg-indigo-900 px-4 py-2 mx-2 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide flex items-center justify-center">
+                    <span class="material-symbols-outlined">
+                        file_download
+                    </span>
+                </a>
+                <a href="{{ route('items', $list) }}" class="bg-red-600 px-4 py-2 mx-2 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide flex items-center justify-center">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </a>
+            </div>
         </div>
     @endforeach
-</x-app-layout>
+</x-guest-layout>

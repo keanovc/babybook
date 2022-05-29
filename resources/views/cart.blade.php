@@ -1,20 +1,7 @@
-<x-app-layout>
-    <svg class="lg:hidden" width="390" height="74" viewBox="0 0 390 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M179.5 46C132.364 36.2406 -8.50609 29.3876 -55 23.5L-28.5047 -25H458.932C462.264 12.0698 376.496 70.4066 344.5 72.5C304.505 75.1167 293 69.5 179.5 46Z" fill="#9EC4C5"/>
-        <path d="M219.429 -15.1767C98.7047 -7.31814 3.5079 25.5488 -29 41L1.79696 -25H203.004C258.78 -25 340.153 -23.0353 219.429 -15.1767Z" fill="#F3C2C2"/>
-    </svg>
-
-    <div x-data="{ cartOpen: false }">
-        <header>
-            <div class="w-10/12 mx-auto pt-6">
-                <div class="flex items-center justify-between">
-                    <div class="w-full text-gray-700 md:text-center text-2xl font-semibold flex items-center">
-                        CART ({{ $cart->getContent()->count() }})
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
+<x-guest-layout>
+    <x-slot name="header">
+        <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">CART ({{ $cart->getContent()->count() }})</h1>
+    </x-slot>
 
     <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
 
@@ -78,10 +65,9 @@
                                 Continue shopping
                             </button>
                         </form>
-
                     </div>
                 @endif
             </div>
         </div>
     </main>
-</x-app-layout>
+</x-guest-layout>

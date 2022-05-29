@@ -1,23 +1,14 @@
-<x-app-layout>
-    <svg width="390" height="74" viewBox="0 0 390 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M179.5 46C132.364 36.2406 -8.50609 29.3876 -55 23.5L-28.5047 -25H458.932C462.264 12.0698 376.496 70.4066 344.5 72.5C304.505 75.1167 293 69.5 179.5 46Z" fill="#9EC4C5"/>
-        <path d="M219.429 -15.1767C98.7047 -7.31814 3.5079 25.5488 -29 41L1.79696 -25H203.004C258.78 -25 340.153 -23.0353 219.429 -15.1767Z" fill="#F3C2C2"/>
-    </svg>
-
-    <header class="mt-6">
-        <div class="flex justify-between items-center w-10/12 m-auto">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button onclick="event.preventDefault();
-                this.closest('form').submit();" class="h-6 text-[#1E3A4C]"/> {{ __('LOGOUT') }} </button>
-            </form>
-            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">ADD LIST</h1>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Close
-            </x-nav-link>
+<x-guest-layout>
+    <x-slot name="header">
+        <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">ADD LIST</h1>
+        <div class="flex items-center justify-around">
+            <a href="{{ route('dashboard') }}" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-gray-300 font-medium rounded-md text-sm ml-2 px-2 pt-1">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </a>
         </div>
-    </header>
+    </x-slot>
 
     <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
 
@@ -31,6 +22,18 @@
                         Name
                     </label>
                     <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="name" type="text" name="name" required>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <div class="w-full px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="name">
+                        Gender
+                    </label>
+                    <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="gender" name="gender" required>
+                        <option value="boy">Boy</option>
+                        <option value="girl">Girl</option>
+                    </select>
                 </div>
             </div>
 
@@ -59,4 +62,4 @@
             </div>
         </form>
     </div>
-</x-app-layout>
+</x-guest-layout>

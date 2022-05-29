@@ -40,6 +40,14 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin' => true])) {
+            $request->authenticate();
+
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
+
         return redirect()->route('login')->with('error', 'User does not exist');
     }
 

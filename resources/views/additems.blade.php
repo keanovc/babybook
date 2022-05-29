@@ -1,23 +1,14 @@
-<x-app-layout>
-    <svg width="390" height="74" viewBox="0 0 390 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M179.5 46C132.364 36.2406 -8.50609 29.3876 -55 23.5L-28.5047 -25H458.932C462.264 12.0698 376.496 70.4066 344.5 72.5C304.505 75.1167 293 69.5 179.5 46Z" fill="#9EC4C5"/>
-        <path d="M219.429 -15.1767C98.7047 -7.31814 3.5079 25.5488 -29 41L1.79696 -25H203.004C258.78 -25 340.153 -23.0353 219.429 -15.1767Z" fill="#F3C2C2"/>
-    </svg>
-
-    <header class="mt-6">
-        <div class="flex justify-between items-center w-10/12 m-auto">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button onclick="event.preventDefault();
-                this.closest('form').submit();" class="h-6 text-[#1E3A4C]"/> {{ __('LOGOUT') }} </button>
-            </form>
-            <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">ADD ITEMS</h1>
-            <x-nav-link :href="route('items', $list)" :active="request()->routeIs('dashboard')">
-                Close
-            </x-nav-link>
+<x-guest-layout>
+    <x-slot name="header">
+        <h1 class="text-[#1E3A4C] font-bold text-2xl uppercase">ADD ITEMS</h1>
+        <div class="flex items-center justify-around">
+            <a href="{{ route('items', $list) }}" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-gray-300 font-medium rounded-md text-sm ml-2 px-2 pt-1">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </a>
         </div>
-    </header>
+    </x-slot>
 
     <hr class="w-11/12 mt-2 mx-auto border-[#1E3A4C]">
 
@@ -72,6 +63,15 @@
             </button>
         </form>
         <hr class="w-11/12 mt-10 mx-auto border-[#1E3A4C]">
+        @if (session('success'))
+            <div class="mt-10 text-[#1E3A4C]">
+                <div class="w-11/12 max-w-sm mx-auto">
+                    <div class="flex justify-center items-center bg-green-200 border-green-300 rounded-[12px] overflow-hidden h-24 lg:h-32 border shadow-lg">
+                        <p class="text-grey-darker text-lg font-bold">{{ session('success') }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="w-11/12 mx-auto">
             @foreach ($articlesWithPriceBelowHighest as $article)
                 <div class="w-full max-w-sm mx-auto my-10 rounded-md shadow-md overflow-hidden">
@@ -81,8 +81,10 @@
 
                             <input type="hidden" name="list" value="{{ $list }}">
                             <input type="hidden" name="article" value="{{ $article->id }}">
-                            <button class="py-2 px-4 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500" type="submit">
-                                <p class="text-2xl">+</p>
+                            <button type="submit" class="flex px-2 py-2 rounded-full bg-blue-500 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                                <span class="material-symbols-outlined">
+                                    add
+                                </span>
                             </button>
                         </form>
                     </div>
@@ -95,4 +97,4 @@
             @endforeach
         </div>
     </div>
-</x-app-layout>
+</x-guest-layout>

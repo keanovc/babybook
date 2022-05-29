@@ -31,7 +31,7 @@ class CheckoutController extends Controller
 
         $webhookUrl = route('webhooks.mollie');
         if (App::environment('local')) {
-            $webhookUrl = 'https://e6a8-2a02-1811-3c2d-b900-756c-3011-d2da-2b0.eu.ngrok.io/webhooks/mollie';
+            $webhookUrl = 'https://3ed8-2a02-1811-3c2d-b900-80c3-844f-9384-5512.eu.ngrok.io/webhooks/mollie';
         }
 
         $total = number_format($total, 2);

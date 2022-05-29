@@ -55,7 +55,7 @@ class CartController extends Controller
             'associatedModel' => $article
         ));
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Article added to cart');
     }
 
     public function cart (Request $request) {
@@ -67,9 +67,8 @@ class CartController extends Controller
     }
 
     public function deleteitem (Request $request, $item) {
-        dd($item);
         $cart = Cart::session($request->list);
-        $cart->remove($request->item);
+        $cart->remove($item);
         return redirect()->back();
     }
 }

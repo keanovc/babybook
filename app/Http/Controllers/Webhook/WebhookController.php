@@ -23,7 +23,7 @@ class WebhookController extends Controller
             $order->status = 'paid';
             $order->save();
 
-            Cart::session($orderId)->clear();
+            Cart::session($order->list_id)->clear();
 
         } elseif ($payment->isOpen()) {
             /*

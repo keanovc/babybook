@@ -127,12 +127,22 @@ class BabylistController extends Controller
         return redirect()->route('additems', $list)->with('success', 'Article added');
     }
 
-    public function removeItems(Request $request, $list, $item)
+    public function deleteList (Request $request, $list) {
+        $list = Babylist::find($list);
+        if (count(Order::where('list_id', $list->id)->get()) > 0) {
+            return redirect()->route('dashboard')->with('error', 'List has orders');
+        } else {
+            $list->delete();
+            return redirect()->route('dashboard')->with('success', 'List deleted');
+        }
+    }
+
+    public function removeItems(Request $request, $list, $article)
     {
-        dd($item);
         $listTotal = Babylist::find($request->list);
         $articles = json_decode($listTotal->articles, true);
-        $articles = array_diff($articles, [$item]);
+        $articles = array_diff($articles, [$article]);
+        $articles = array_values($articles);
         $listTotal->articles = json_encode($articles);
         $listTotal->save();
         return redirect()->route('items', $list)->with('success', 'Article removed');

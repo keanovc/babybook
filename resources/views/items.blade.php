@@ -94,7 +94,7 @@
         @foreach ($articles as $article)
             <div class="bg-white w-10/12 max-w-sm mx-auto rounded-[12px] overflow-hidden mt-5 border shadow-lg">
                 <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../img/{{ $article->image }}')">
-                    <form action="{{ route('items.delete', [$list, $article->id]) }}" method="DELETE">
+                    <form action="{{ route('items.delete', [$list, $article]) }}" method="POST">
                         @csrf
 
                         <button type="submit" class="flex px-2 py-2 rounded-full bg-red-500 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">

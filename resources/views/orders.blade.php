@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-slot name="header">
-        <div class="px-7 bg-white shadow-lg rounded-t-2xl">
+        <div class="px-7 bg-white shadow-lg">
             <div class="flex">
                 <div class="flex-1 group">
                     <a href="{{ route('dashboard') }}" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">

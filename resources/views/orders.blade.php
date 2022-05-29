@@ -54,20 +54,22 @@
         </div>
     </x-slot>
 
-    @foreach ($orders as $order)
-        <div class="pt-5 text-[#1E3A4C] w-11/12 lg:w-2/12 mx-auto">
-            <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex items-center justify-between bg-white rounded-[12px] overflow-hidden h-32 lg:h-32 border shadow-md">
-                <div class="flex items-center pr-16">
-                    <div class="w-16 h-16 mx-5 flex object-cover">
-                        <img class="rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png" alt="person">
+    <div class="pt-10">
+        @foreach ($orders as $order)
+            <div class="pb-5 text-[#1E3A4C] w-10/12 lg:w-2/12 mx-auto">
+                <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex items-center justify-between bg-white rounded-[12px] overflow-hidden h-32 lg:h-32 border shadow-md">
+                    <div class="flex items-center pr-16">
+                        <div class="w-16 h-16 mx-5 flex object-cover">
+                            <img class="rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png" alt="person">
+                        </div>
+                        <div class="text-left">
+                            <p class="text-grey-darker text-lg font-bold uppercase">{{ $order->name }}</p>
+                            <p class="text-grey-darker text-lg">Prijs: {{ $order->total }}</p>
+                            <p class="text-grey-darker text-lg">Status: {{ $order->status }}</p>
+                        </div>
                     </div>
-                    <div class="text-left">
-                        <p class="text-grey-darker text-lg font-bold uppercase">{{ $order->name }}</p>
-                        <p class="text-grey-darker text-lg">Prijs: {{ $order->total }}</p>
-                        <p class="text-grey-darker text-lg">Status: {{ $order->status }}</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    @endforeach
+                </a>
+            </div>
+        @endforeach
+    </div>
 </x-guest-layout>

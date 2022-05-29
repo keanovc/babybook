@@ -19,8 +19,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-indigo-100 pb-28">
-            <header class="block fixed inset-x-0 bottom-0 z-10">
+        <div class="min-h-screen bg-indigo-100 pt-16 pb-5">
+            <header class="block fixed inset-x-0 top-0 z-10">
                 {{ $header }}
             </header>
 

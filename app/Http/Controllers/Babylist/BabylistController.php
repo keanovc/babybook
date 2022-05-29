@@ -24,6 +24,11 @@ class BabylistController extends Controller
     public function items(Request $request, $list)
     {
         $list = Babylist::find($list);
+        $categories = Category::all();
+        $categories_with_shops = [];
+        foreach ($categories as $category) {
+            $categories_with_shops[$category->id] = $category->shop;
+        }
         $articles = Article::whereIn('id', json_decode($list->articles))->get();
 
         $orders = Order::where('list_id', $list->id)->get();
@@ -34,8 +39,7 @@ class BabylistController extends Controller
         $reservedArticles = Article::whereIn('id', $reservedArticles)->get();
         $articles = $articles->diff($reservedArticles);
 
-
-        return view('items', compact('list', 'articles', 'reservedArticles'));
+        return view('items', compact('list', 'articles', 'reservedArticles', 'categories_with_shops'));
     }
 
     public function addlist(Request $request)
@@ -123,12 +127,12 @@ class BabylistController extends Controller
         return redirect()->route('additems', $list)->with('success', 'Article added');
     }
 
-    public function removeItems(Request $request, $list)
+    public function removeItems(Request $request, $list, $item)
     {
-        dd($request->all());
+        dd($item);
         $listTotal = Babylist::find($request->list);
         $articles = json_decode($listTotal->articles, true);
-        $articles = array_diff($articles, [$request->article]);
+        $articles = array_diff($articles, [$item]);
         $listTotal->articles = json_encode($articles);
         $listTotal->save();
         return redirect()->route('items', $list)->with('success', 'Article removed');

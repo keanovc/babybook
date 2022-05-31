@@ -11,8 +11,8 @@
                 </div>
                 <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                     <div class="text-center mb-10">
-                        <h1 class="font-bold text-3xl text-white">INVITE</h1>
-                        <p class="text-gray-300">Enter your invitation code from the parents</p>
+                        <h1 class="font-bold text-3xl text-white">{{ __('BABY INVITE') }}</h1>
+                        <p class="text-gray-300">{{ __('Enter your invitation code from the parents') }}</p>
                     </div>
                     <form method="GET" action="{{ route('guestlist') }}">
                         @if (session('error'))
@@ -40,7 +40,7 @@
                         </div>
                         <div class="flex items-center justify-center mt-4">
                             <a class="text-white text-md xl:text-base lg:text-base" href="{{ route('register') }}">
-                                Want to create a list yourself? {{ __('Sign up here') }}
+                                {{ __('Want to create a list yourself?') }} {{ __('Sign up here') }}
                             </a>
                         </div>
                     </form>

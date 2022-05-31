@@ -11,7 +11,7 @@
                 </div>
                 <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                     <div class="text-center mb-10">
-                        <h1 class="font-bold text-3xl text-white">Forgot Password</h1>
+                        <h1 class="font-bold text-3xl text-white">{{ __('Forgot Password') }}</h1>
                         <p class="text-gray-300">{{ __('Enter your email address and we will email you a password reset link.') }}</p>
                     </div>
                     <form method="POST" action="{{ route('password.email') }}">
@@ -45,8 +45,8 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-center mt-4">
-                            <a class="text-white text-md xl:text-base lg:text-base" href="{{ route('login') }}">
-                                Remember it again? {{ __('Sign in here') }}
+                            <a class="text-gray-400 hover:text-gray-300 text-md xl:text-base lg:text-base" href="{{ route('login') }}">
+                                {{ __('Remember it again?') }} {{ __('Sign in here') }}
                             </a>
                         </div>
                     </form>

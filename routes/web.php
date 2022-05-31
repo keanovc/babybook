@@ -11,7 +11,6 @@ use App\Http\Controllers\Export;
 
 Route::get('/dashboard', Babylist\BabylistController::class)->middleware(['auth'])->name('dashboard');
 Route::delete('/dashboard/{list}', [Babylist\BabylistController::class, 'deleteList'])->middleware(['auth'])->name('dashboard.delete');
-Route::get('/dashboard/copy', [Babylist\BabylistController::class, 'copy'])->middleware(['auth'])->name('dashboard.copy');
 Route::get('/addlist', [Babylist\BabylistController::class, 'addlist'])->middleware(['auth'])->name('addlist');
 Route::post('/addlist/store', [Babylist\BabylistController::class, 'storeList'])->middleware(['auth'])->name('addlist.store');
 Route::get('/items/{list}', [Babylist\BabylistController::class, 'items'])->middleware(['auth'])->name('items');

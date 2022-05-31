@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="px-7 bg-white shadow-lg md:flex md:justify-around md:items-center">
             <a href="{{ route('dashboard') }}" class="hidden md:block">
-                <img class="h-8 w-auto" src="../../img/logob.svg" alt="">
+                <img class="h-8 w-auto" src="../../img/logob.svg" alt="logo">
             </a>
             <div class="flex">
                 <div class="flex-1 group">
@@ -58,36 +58,46 @@
     </x-slot>
 
     <div class="pt-10 mx-auto w-11/12 max-w-sm">
-        @foreach ($orders as $order)
-            @if ($order->status == 'pending')
-            <div class="pl-1 h-20 bg-yellow-400 mb-5 rounded-lg shadow-md">
+        @if (count($orders) > 0)
+            @foreach ($orders as $order)
+                @if ($order->status == 'pending')
+                <div class="pl-1 h-20 bg-yellow-400 mb-5 rounded-lg shadow-md transition duration-500 hover:scale-105">
+                    <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex w-full h-full py-2 px-4 bg-white rounded-lg justify-between">
+                        <div class="my-auto">
+                            <p class="font-bold">{{ $order->name }} ({{ __('PENDING') }})</p>
+                            <p class="text-lg">€{{ $order->total }}</p>
+                        </div>
+                        <div class="my-auto">
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                @else
+                <div class="pl-1 h-20 bg-green-400 mb-5 rounded-lg shadow-md transition duration-500 hover:scale-105">
+                    <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex w-full h-full py-2 px-4 bg-white rounded-lg justify-between">
+                        <div class="my-auto">
+                            <p class="font-bold">{{ $order->name }} ({{ __('PAID') }})</p>
+                            <p class="text-lg">€{{ $order->total }}</p>
+                        </div>
+                        <div class="my-auto">
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                @endif
+            @endforeach
+        @else
+            <div class="pl-1 h-20 bg-red-400 mb-5 rounded-lg shadow-md">
                 <div class="flex w-full h-full py-2 px-4 bg-white rounded-lg justify-between">
                 <div class="my-auto">
-                    <p class="font-bold">{{ $order->name }} (PENDING)</p>
-                    <p class="text-lg">€{{ $order->total }}</p>
-                </div>
-                <div class="my-auto">
-                    <span class="material-symbols-outlined">
-                        person
-                    </span>
+                    <p class="font-bold">{{ __('No orders') }}</p>
                 </div>
                 </div>
             </div>
-            @else
-            <div class="pl-1 h-20 bg-green-400 mb-5 rounded-lg shadow-md">
-                <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex w-full h-full py-2 px-4 bg-white rounded-lg justify-between">
-                <div class="my-auto">
-                    <p class="font-bold">{{ $order->name }} (PAID)</p>
-                    <p class="text-lg">€{{ $order->total }}</p>
-                </div>
-                <div class="my-auto">
-                    <span class="material-symbols-outlined">
-                        person
-                    </span>
-                </div>
-                </a>
-            </div>
-            @endif
-        @endforeach
+        @endif
     </div>
 </x-guest-layout>

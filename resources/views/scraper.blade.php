@@ -6,8 +6,8 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="max-w-3xl mx-auto w-11/12">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="p-6 bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <form action="{{ route('scraper.categories') }}" method="POST">
                         @csrf
@@ -53,7 +53,7 @@
                     </form>
                 </div>
             </div>
-            <div class="mt-16 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="mt-16 bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -61,7 +61,7 @@
                                 <th scope="col" class="px-6 py-3">
                                     {{ __('Categories') }}
                                 </th>
-                                <th scope="col" class="p-6 w-4/12">
+                                <th scope="col" class="p-6 w-full md:w-4/12">
                                     <div class="w-full">
                                         <form action="{{ route('scraper.show') }}" method="GET">
                                             <select onchange="this.form.submit()" required name="shop" id="shop" class="form-select appearance-none

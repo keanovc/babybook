@@ -34,9 +34,9 @@ class CartController extends Controller
             });
             $cartItems = Cart::session($list->id)->getContent();
 
-            return view('guestlist', compact('list', 'articles', 'cartItems'));
+            return view('guestlist', compact('list', 'articles', 'cartItems', 'invitationCode'));
         } else {
-            return redirect()->route('invitation')->with('error', 'Invalid invitation code');
+            return redirect()->route('invitation')->with('error', __('Invalid invitation code'));
         }
     }
 
@@ -55,7 +55,7 @@ class CartController extends Controller
             'associatedModel' => $article
         ));
 
-        return redirect()->back()->with('success', 'Article added to cart');
+        return redirect()->back()->with('success', __('Article added to cart'));
     }
 
     public function cart (Request $request) {

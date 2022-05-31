@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="px-7 bg-white shadow-lg md:flex md:justify-around md:items-center">
             <a href="{{ route('dashboard') }}" class="hidden md:block">
-                <img class="h-8 w-auto" src="../../img/logob.svg" alt="">
+                <img class="h-8 w-auto" src="../../../img/logob.svg" alt="logo">
             </a>
             <div class="flex">
                 <div class="flex-1 group">
@@ -57,9 +57,9 @@
         </div>
     </x-slot>
 
-    <div class="bg-white mt-10 py-5 px-2 border shadow-lg w-10/12 lg:w-2/12 mx-auto rounded-lg">
+    <div class="mx-auto w-10/12 md:w-6/12 lg:w-4/12 xl:w-4/12 bg-white rounded-3xl py-5 md:p-10 md:shadow-md mt-10 md:mt-20">
         <div class="flex justify-end mr-5">
-            <a href="{{ route('orders', $list) }}">
+            <a href="{{ route('orders', $list) }}" class="transition duration-500 hover:scale-110">
                 <span class="material-symbols-outlined text-[#1E3A4C]">
                     close
                 </span>
@@ -69,32 +69,39 @@
         <div class="pt-5 text-[#1E3A4C] w-10/12 mx-auto">
             <div class="flex items-center">
                 <div class="text-left">
-                    <p class="text-grey-darker text-lg font-bold uppercase">Naam: {{ $order->name }}</p>
-                    <p class="text-grey-darker text-lg">Bericht: {{ $order->remarks }}</p>
-                    <p class="text-grey-darker text-lg">Prijs: {{ $order->total }}</p>
-                    <p class="text-grey-darker text-lg">Status: {{ $order->status }}</p>
+                    <p class="text-grey-darker text-lg font-bold uppercase">{{ __('Name') }}: {{ $order->name }}</p>
+                    <p class="text-grey-darker text-lg">{{ __('Message') }}: {{ $order->remarks }}</p>
+                    <p class="text-grey-darker text-lg">{{ __('Price') }}: {{ $order->total }}</p>
+                    <p class="text-grey-darker text-lg">{{ __('Status') }}: {{ $order->status }}</p>
                 </div>
             </div>
         </div>
 
         <div class="w-10/12 mx-auto max-w-sm mt-10">
-            <h3>Paid products ({{ $articles->count() }})</h3>
+            <h3>{{ __('Paid products') }} ({{ $articles->count() }})</h3>
             <hr class="border-gray-400">
         </div>
 
         <div class="mt-5 text-[#1E3A4C]">
             @if (count($articles) > 0)
                 @foreach ($articles as $article)
-                    <div class="w-10/12 max-w-sm mx-auto rounded-[12px] overflow-hidden mt-5 border shadow-lg">
-                        <div class="flex items-end justify-end h-36 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')"></div>
+                    <div class="bg-white w-10/12 max-w-sm mx-auto rounded-3xl overflow-hidden mt-5 border shadow-lg">
+                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')"></div>
                         <div class="px-5 py-3">
-                            <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>
-                            <span class="text-gray-500 mt-2">€{{ $article->price }}</span>
+                            <h1 class="text-lg font-normal mb-0 text-gray-600 font-sans">
+                                {{ $article->title }}
+                            </h1>
+                            <a href="{{ $article->url }}" target="_blank">
+                                <span class="text-sm text-indigo-300 hover:text-indigo-500 mt-0">{{ __('see article') }}</span>
+                            </a>
+                            <h1 class="mt-5 font-bold text-gray-500">€{{ $article->price }}</h1>
                         </div>
                     </div>
                 @endforeach
             @else
-                <p class="text-center text-gray-500">No items yet</p>
+                <div class="w-10/12 mx-auto max-w-sm">
+                    <p class="text-center text-gray-500">{{ __('No products yet') }}</p>
+                </div>
             @endif
         </div>
     </div>

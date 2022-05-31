@@ -7,11 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="p-4 max-w-3xl mx-auto bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 max-w-3xl w-11/12 mx-auto bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex justify-between items-center mb-4">
-                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Articles ({{ count($articles) }})</h5>
+                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">{{ __('Articles') }} ({{ count($articles) }})</h5>
                     <div class="w-10/12 flex justify-end items-center">
-                        <div class="w-4/12 ml-6">
+                        <div class="w-8/12 md:w-4/12 ml-6">
                             <form action="{{ route('adminDashboard') }}" method="GET">
                                 <select onchange="this.form.submit()" required name="shop" id="shop" class="form-select appearance-none
                                 block

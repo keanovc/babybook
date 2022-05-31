@@ -18,8 +18,8 @@
                         />
                     </div> --}}
                     <div class="text-center mb-10">
-                        <h1 class="font-bold text-3xl text-white uppercase">Login</h1>
-                        <p class="text-gray-300">Enter your information to login</p>
+                        <h1 class="font-bold text-3xl text-white uppercase">{{ __('Login') }}</h1>
+                        <p class="text-gray-300">{{ __('Enter your information to login') }}</p>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -31,7 +31,7 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                <label for="" class="text-xs font-semibold px-1">Email</label>
+                                <label for="" class="text-xs font-semibold px-1">{{ __('Email') }}</label>
                                 <div class="flex">
                                     <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
                                     <input required type="email" id="email" name="email" class="w-full -ml-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:blue-indigo-500" placeholder="johnsmith@example.com">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="flex -mx-3">
                             <div class="w-full px-3">
-                                <label for="" class="text-xs font-semibold px-1">Password</label>
+                                <label for="" class="text-xs font-semibold px-1">{{ __('Password') }}</label>
                                 <div class="flex">
                                     <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
                                     <input required type="password" id="password" name="password" class="w-full -ml-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:blue-indigo-500" placeholder="************">
@@ -49,7 +49,7 @@
                         </div>
                         @if (Route::has('password.request'))
                             <div class="flex items-center justify-end mt-4 mb-10">
-                                <a class="text-right text-md xl:text-base lg:text-base text-gray-400 hover:text-indigo-500" href="{{ route('password.request') }}">
+                                <a class="text-right text-md xl:text-base lg:text-base text-gray-400 hover:text-gray-300" href="{{ route('password.request') }}">
                                     {{ __('Forgot your password?') }}
                                 </a>
                             </div>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-center mt-4">
-                            <a class="text-white text-md xl:text-base lg:text-base" href="{{ route('register') }}">
+                            <a class="text-gray-400 hover:text-gray-300 text-md xl:text-base lg:text-base" href="{{ route('register') }}">
                                 {{ __("Don't have an account?") }} {{ __('Sign up here') }}
                             </a>
                         </div>

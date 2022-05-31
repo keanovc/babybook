@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Checkout;
 
 use App\Http\Controllers\Controller;
+use App\Models\Babylist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Order;
+use App\Models\User;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Mollie\Laravel\Facades\Mollie;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderShipped;
 
 class CheckoutController extends Controller
 {
@@ -31,7 +35,7 @@ class CheckoutController extends Controller
 
         $webhookUrl = route('webhooks.mollie');
         if (App::environment('local')) {
-            $webhookUrl = 'https://3ed8-2a02-1811-3c2d-b900-80c3-844f-9384-5512.eu.ngrok.io/webhooks/mollie';
+            $webhookUrl = 'https://9d47-2a02-1811-3c2d-b900-4000-fd4c-90a3-2140.eu.ngrok.io/webhooks/mollie';
         }
 
         $total = number_format($total, 2);
@@ -50,11 +54,21 @@ class CheckoutController extends Controller
             ],
         ]);
 
+        $this->sendMail($order);
+
         // redirect customer to Mollie checkout page
         return redirect($payment->getCheckoutUrl(), 303);
     }
 
     public function success (Request $request) {
         return view('success');
+    }
+
+    private function sendMail ($order) {
+        $list = Babylist::find($order->list_id);
+
+        $user = User::find($list->user_id);
+
+        Mail::to($user->email)->send(new OrderShipped($order));
     }
 }

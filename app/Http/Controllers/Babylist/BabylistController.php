@@ -26,7 +26,7 @@ class BabylistController extends Controller
         $list = Babylist::find($list);
 
         if ($list->user_id != $request->user()->id) {
-            return redirect()->route('dashboard')->with('error', 'List not found');
+            return redirect()->route('dashboard')->with('error', __('List not found'));
         }
 
         $categories = Category::all();
@@ -126,7 +126,7 @@ class BabylistController extends Controller
         $babylist->articles = json_encode([]);
         $babylist->save();
 
-        return redirect()->route('dashboard')->with('success', 'List created');
+        return redirect()->route('dashboard')->with('success', __('List created'));
     }
 
     public function storeItems(Request $request)
@@ -139,16 +139,16 @@ class BabylistController extends Controller
         $listTotal->save();
 
 
-        return redirect()->route('additems', $list)->with('success', 'Article added');
+        return redirect()->route('additems', $list)->with('success', __('Article added'));
     }
 
     public function deleteList (Request $request, $list) {
         $list = Babylist::find($list);
         if (count(Order::where('list_id', $list->id)->get()) > 0) {
-            return redirect()->route('dashboard')->with('error', 'List has orders');
+            return redirect()->route('dashboard')->with('error', __('List has orders'));
         } else {
             $list->delete();
-            return redirect()->route('dashboard')->with('success', 'List deleted');
+            return redirect()->route('dashboard')->with('success', __('List deleted'));
         }
     }
 
@@ -160,7 +160,7 @@ class BabylistController extends Controller
         $articles = array_values($articles);
         $listTotal->articles = json_encode($articles);
         $listTotal->save();
-        return redirect()->route('items', $list)->with('success', 'Article removed');
+        return redirect()->route('items', $list)->with('success', __('Article removed'));
     }
 
     public function orders (Request $request, $list) {
@@ -175,16 +175,5 @@ class BabylistController extends Controller
         $articles = Article::whereIn('id', $articles)->get();
 
         return view('reserved', compact('articles', 'list', 'order'));
-    }
-
-    public function copy (Request $request, $list) {
-        $copyLink = 'https://babybook.keanovancuyck.be/invitation/list?invitation_code=' . $list->invitation_code;
-        if (App::environment('local')) {
-            $copyLink = 'http://127.0.0.1:8000/invitation/list?invitation_code='. $list->invitation_code;
-        }
-
-
-
-        return redirect()->route('dashboard')->with('success', 'List copied');
     }
 }

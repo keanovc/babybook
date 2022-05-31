@@ -9,6 +9,7 @@ use Mollie\Laravel\Facades\Mollie;
 use App\Models\Order;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
+
 class WebhookController extends Controller
 {
     public function handleWebhookNotification(Request $request) {
@@ -22,8 +23,6 @@ class WebhookController extends Controller
             $order = Order::findOrFail($orderId);
             $order->status = 'paid';
             $order->save();
-
-            Cart::session($order->list_id)->clear();
 
         } elseif ($payment->isOpen()) {
             /*

@@ -40,12 +40,11 @@
             }
 
             .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                color: #666666;
+                padding: 5px;
                 text-align: center;
+                font-size: 12px;
+                color: #666666;
+                font-weight: 400;
             }
         </style>
 
@@ -56,16 +55,14 @@
     </head>
     <body class="font-sans antialiased">
         <div>
-            <div style='background:#FFFFFF;background-color:#FFFFFF;max-width:800px;'>
+            <div style='background:#FFFFFF;background-color:#FFFFFF;'>
                 <div class="header">
                     BABYBOOK
                 </div>
                 <hr>
                 <div align='left' style="padding:20px">
-                    <h1 class="title">Baby: {{ $list->name }}</h1>
-                    <p class="text"><span>Geslacht: </span>{{ $list->gender }}</p>
-                    <p class="text"><span>Beschrijving: </span>{{ $list->description }}</p>
-                    <p class="text"><span>Invite code: </span>{{ $list->invitation_code }}</p>
+                    <h1 class="title">Betaald door {{ $orderName }}</h1>
+                    <p class="text"><span>Bericht: {{ $orderRemarks }}</p>
                 </div>
               <table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='background:#FFFFFF;background-color:#FFFFFF;width:100%;'>
                 <tbody>
@@ -138,7 +135,7 @@
                                   </td>
                                   <td style='text-align: right; border-top: 1px solid #cccccc;'>
                                     <span style='display: inline-block;font-weight: bold; color: #4d4d4d'>
-                                        €{{ $totalPrice }}
+                                        €{{ $orderTotal }}
                                     </span>
                                   </td>
                                 </tr>
@@ -155,6 +152,6 @@
                 <p>Copyright © 2022, All Right Reserved Babybook</p>
               </div>
             </div>
-          </div>
+        </div>
     </body>
 </html>

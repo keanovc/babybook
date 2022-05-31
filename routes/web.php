@@ -7,10 +7,7 @@ use App\Http\Controllers\Babylist;
 use App\Http\Controllers\Cart;
 use App\Http\Controllers\Checkout;
 use App\Http\Controllers\Webhook;
-
-Route::get('/', function () {
-    return view('auth.login');
-});
+use App\Http\Controllers\Export;
 
 Route::get('/dashboard', Babylist\BabylistController::class)->middleware(['auth'])->name('dashboard');
 Route::delete('/dashboard/{list}', [Babylist\BabylistController::class, 'deleteList'])->middleware(['auth'])->name('dashboard.delete');
@@ -24,6 +21,8 @@ Route::post('/items/{list}/additems/store', [Babylist\BabylistController::class,
 
 Route::get('/items/{list}/orders', [Babylist\BabylistController::class, 'orders'])->middleware(['auth'])->name('orders');
 Route::get('/items/{list}/orders/{order}', [Babylist\BabylistController::class, 'reserved'])->middleware(['auth'])->name('orders.reserved');
+
+Route::get('/items/{list}/pdf', [Export\ExportController::class, 'pdf'])->middleware(['auth'])->name('items.pdf');
 
 Route::get('/invitation', [Cart\CartController::class, 'invitation'])->name('invitation');
 Route::get('/invitation/list', [Cart\CartController::class, 'guestlist'])->name('guestlist');

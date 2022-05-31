@@ -1,75 +1,93 @@
 <x-guest-layout>
     <x-slot name="header">
-        <div class="px-7 bg-white shadow-lg">
+        <div class="px-7 bg-white shadow-lg md:flex md:justify-around md:items-center">
+            <a href="{{ route('dashboard') }}" class="hidden md:block">
+                <img class="h-8 w-auto" src="../../img/logob.svg" alt="">
+            </a>
             <div class="flex">
                 <div class="flex-1 group">
-                    <a href="{{ route('dashboard') }}" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                        <span class="block px-1 pt-1 pb-1">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                        <a href="{{ route('dashboard') }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 list_alt
                             </span>
-                            <span class="block text-xs pb-2">Lists</span>
+                            <span class="block text-xs pb-2">{{ __('Lists') }}</span>
                             <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                        </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex-1 group">
-                    <a href="{{ route('items', $list) }}" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                        <span class="block px-1 pt-1 pb-1">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-500 group-hover:text-indigo-500">
+                        <a href="{{ route('items', $list) }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 article
                             </span>
-                            <span class="block text-xs pb-2">Articles</span>
+                            <span class="block text-xs pb-2">{{ __('Articles') }}</span>
                             <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                        </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex-1 group">
-                    <a href="{{ route('orders', $list) }}" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-indigo-500 group-hover:text-indigo-500">
-                        <span class="block px-1 pt-1 pb-1">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-indigo-500 group-hover:text-indigo-500">
+                        <a href="{{ route('orders', $list) }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 redeem
                             </span>
-                            <span class="block text-xs pb-2">Orders</span>
+                            <span class="block text-xs pb-2">{{ __('Orders') }}</span>
                             <span class="block w-5 mx-auto h-1 bg-indigo-500 group-hover:bg-indigo-500 rounded-full"></span>
-                        </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex-1 group">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <button onclick="event.preventDefault(); this.closest('form').submit();" type="button" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                            <span class="block px-1 pt-1 pb-1">
+                        <div type="button" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                            <button onclick="event.preventDefault(); this.closest('form').submit();" class="block px-1 pt-1 pb-1">
                                 <span class="material-symbols-outlined">
                                     logout
                                 </span>
-                                <span class="block text-xs pb-2">Logout</span>
+                                <span class="block text-xs pb-2">{{ __('Logout') }}</span>
                                 <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                            </span>
-                        </button>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </x-slot>
 
-    <div class="pt-10">
+    <div class="pt-10 mx-auto w-11/12 max-w-sm">
         @foreach ($orders as $order)
-            <div class="pb-5 text-[#1E3A4C] w-10/12 lg:w-2/12 mx-auto">
-                <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex items-center justify-between bg-white rounded-[12px] overflow-hidden h-32 lg:h-32 border shadow-md">
-                    <div class="flex items-center pr-16">
-                        <div class="w-16 h-16 mx-5 flex object-cover">
-                            <img class="rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png" alt="person">
-                        </div>
-                        <div class="text-left">
-                            <p class="text-grey-darker text-lg font-bold uppercase">{{ $order->name }}</p>
-                            <p class="text-grey-darker text-lg">Prijs: {{ $order->total }}</p>
-                            <p class="text-grey-darker text-lg">Status: {{ $order->status }}</p>
-                        </div>
-                    </div>
+            @if ($order->status == 'pending')
+            <div class="pl-1 h-20 bg-yellow-400 mb-5 rounded-lg shadow-md">
+                <div class="flex w-full h-full py-2 px-4 bg-white rounded-lg justify-between">
+                <div class="my-auto">
+                    <p class="font-bold">{{ $order->name }} (PENDING)</p>
+                    <p class="text-lg">€{{ $order->total }}</p>
+                </div>
+                <div class="my-auto">
+                    <span class="material-symbols-outlined">
+                        person
+                    </span>
+                </div>
+                </div>
+            </div>
+            @else
+            <div class="pl-1 h-20 bg-green-400 mb-5 rounded-lg shadow-md">
+                <a href="{{ route('orders.reserved', [$list, $order->id]) }}" class="flex w-full h-full py-2 px-4 bg-white rounded-lg justify-between">
+                <div class="my-auto">
+                    <p class="font-bold">{{ $order->name }} (PAID)</p>
+                    <p class="text-lg">€{{ $order->total }}</p>
+                </div>
+                <div class="my-auto">
+                    <span class="material-symbols-outlined">
+                        person
+                    </span>
+                </div>
                 </a>
             </div>
+            @endif
         @endforeach
     </div>
 </x-guest-layout>

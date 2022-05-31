@@ -1,62 +1,65 @@
 <x-guest-layout>
     <x-slot name="header">
-        <div class="px-7 bg-white shadow-lg">
+        <div class="px-7 bg-white shadow-lg md:flex md:justify-around md:items-center">
+            <a href="{{ route('dashboard') }}" class="hidden md:block">
+                <img class="h-8 w-auto" src="../../img/logob.svg" alt="">
+            </a>
             <div class="flex">
                 <div class="flex-1 group">
-                    <a href="{{ route('dashboard') }}" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                        <span class="block px-1 pt-1 pb-1">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                        <a href="{{ route('dashboard') }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 list_alt
                             </span>
-                            <span class="block text-xs pb-2">Lists</span>
+                            <span class="block text-xs pb-2">{{ __('Lists') }}</span>
                             <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                        </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex-1 group">
-                    <a href="#" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-indigo-500 group-hover:text-indigo-500">
-                        <span class="block px-1 pt-1 pb-1">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-indigo-500 group-hover:text-indigo-500">
+                        <a href="{{ route('items', $list) }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 article
                             </span>
-                            <span class="block text-xs pb-2">Articles</span>
+                            <span class="block text-xs pb-2">{{ __('Articles') }}</span>
                             <span class="block w-5 mx-auto h-1 bg-indigo-500 group-hover:bg-indigo-500 rounded-full"></span>
-                        </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex-1 group">
-                    <a href="{{ route('orders', $list) }}" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                        <span class="block px-1 pt-1 pb-1">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                        <a href="{{ route('orders', $list) }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 redeem
                             </span>
-                            <span class="block text-xs pb-2">Orders</span>
+                            <span class="block text-xs pb-2">{{ __('Orders') }}</span>
                             <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                        </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex-1 group">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <button onclick="event.preventDefault(); this.closest('form').submit();" type="button" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                            <span class="block px-1 pt-1 pb-1">
+                        <div type="button" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                            <button onclick="event.preventDefault(); this.closest('form').submit();" class="block px-1 pt-1 pb-1">
                                 <span class="material-symbols-outlined">
                                     logout
                                 </span>
-                                <span class="block text-xs pb-2">Logout</span>
+                                <span class="block text-xs pb-2">{{ __('Logout') }}</span>
                                 <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
-                            </span>
-                        </button>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </x-slot>
 
-    <div class="mt-10 mx-auto w-10/12 xl:w-3/12 lg:w-3/12 lg:bg-white lg:rounded lg:p-10 lg:shadow-md lg:mt-20">
+    <div class="mt-10 mx-auto w-10/12 md:w-6/12 lg:w-4/12 xl:w-4/12 md:bg-white md:rounded-3xl md:p-10 md:shadow-md md:mt-20">
         <div class="flex items-center justify-between mb-5 px-1">
-            <h1 class="text-xl uppercase font-bold">Add items</h1>
+            <h1 class="text-xl uppercase font-bold">{{ __('Add articles') }}</h1>
             <a href="{{ route('items', $list) }}" class="text-black focus:ring-gray-300 font-medium rounded-md text-sm">
                 <span class="material-symbols-outlined">
                     close
@@ -113,8 +116,8 @@
                 <button type="submit" class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-blue-700 text-white rounded-lg px-3 py-3 font-semibold">Search</button>
             </div>
         </form>
-        <div class="w-11/12 mx-auto max-w-sm mt-10">
-            <h3>Products ({{ count($articlesWithPriceBelowHighest) }})</h3>
+        <div class="w-full mx-auto mt-10">
+            <h3>{{ __('Products') }} ({{ count($articlesWithPriceBelowHighest) }})</h3>
             <hr class="border-gray-400">
         </div>
         @if (session('success'))
@@ -129,28 +132,33 @@
                 </div>
             </div>
         @endif
-        <div class="w-11/12 mx-auto">
+        <div class="w-full mx-auto md:overflow-y-auto md:h-[32rem]">
             @foreach ($articlesWithPriceBelowHighest as $article)
-                <div class="w-full max-w-sm mx-auto my-5 rounded-md shadow-md overflow-hidden">
-                    <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../../img/{{ $article->image }}')">
+                <div class="bg-white w-full max-w-sm mx-auto my-5 rounded-3xl overflow-hidden mt-5 border shadow-lg">
+                    <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../img/{{ $article->image }}')">
                         <form method="POST" action="{{ route('additems.store', $article) }}">
                             @csrf
 
                             <input type="hidden" name="list" value="{{ $list }}">
                             <input type="hidden" name="article" value="{{ $article->id }}">
-                            <button type="submit" class="flex px-2 py-2 rounded-full bg-indigo-500 text-white mx-5 -mb-4 hover:bg-indigo-600 focus:outline-none focus:bg-blue-500">
+                            <button type="submit" class="flex px-2 py-2 rounded-full bg-indigo-500 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                 <span class="material-symbols-outlined">
                                     add
                                 </span>
                             </button>
                         </form>
                     </div>
-                    <div class="px-5 py-3 bg-white">
-                        <h3 class="text-gray-700 uppercase">{{ $article->title }}</h3>
-                        <span class="text-gray-500 mt-2">€ {{ $article->price }}</span>
+                    <div class="px-5 py-3">
+                        <h1 class="text-lg font-normal mb-0 text-gray-600 font-sans">
+                            {{ $article->title }}
+                        </h1>
+                        <a href="{{ $article->url }}" target="_blank">
+                            <span class="text-sm text-indigo-300 mt-0">{{ __('see article') }}</span>
+                        </a>
+                        <h1 class="mt-5 font-bold text-gray-500">€{{ $article->price }}</h1>
                     </div>
                 </div>
-                <hr>
+                <hr class="w-10/12 mx-auto border-gray-300">
             @endforeach
         </div>
     </div>

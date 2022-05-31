@@ -1,6 +1,6 @@
 <x-auth-layout>
     <div class="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
-        <div class="bg-[#1E3A4C] lg:bg-transparent text-gray-500 rounded-xl md:rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
+        <div class="bg-[#1E3A4C] bg-opacity-60 backdrop-filter backdrop-blur-lg text-gray-400 rounded-xl md:rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
             <div class="md:flex w-full">
                 <div class="hidden md:flex w-1/2 py-10 px-10 items-center">
                     <img
@@ -19,7 +19,7 @@
                     </div> --}}
                     <div class="text-center mb-10">
                         <h1 class="font-bold text-3xl text-white uppercase">Login</h1>
-                        <p>Enter your information to login</p>
+                        <p class="text-gray-300">Enter your information to login</p>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-center mt-4">
-                            <a class="text-white text-md xl:text-base lg:text-base hover:text-indigo-500" href="{{ route('register') }}">
-                                {{ __("Don't have an account?") }} <span class="text-indigo-500">{{ __('Sign up here') }}</span>
+                            <a class="text-white text-md xl:text-base lg:text-base" href="{{ route('register') }}">
+                                {{ __("Don't have an account?") }} {{ __('Sign up here') }}
                             </a>
                         </div>
                     </form>

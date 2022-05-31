@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Article;
 use App\Models\Babylist;
-use App\Models\User;
 use App\Models\Order;
+use Illuminate\Support\Facades\App;
 
 
 class BabylistController extends Controller
@@ -24,6 +24,11 @@ class BabylistController extends Controller
     public function items(Request $request, $list)
     {
         $list = Babylist::find($list);
+
+        if ($list->user_id != $request->user()->id) {
+            return redirect()->route('dashboard')->with('error', 'List not found');
+        }
+
         $categories = Category::all();
         $categories_with_shops = [];
         foreach ($categories as $category) {
@@ -102,11 +107,21 @@ class BabylistController extends Controller
 
     public function storeList(Request $request)
     {
+        // create a random code that is not already in the database
+        $code = '';
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        do {
+            $charactersLength = strlen($characters);
+            for ($i = 0; $i < 6; $i++) {
+                $code .= $characters[rand(0, $charactersLength - 1)];
+            }
+        } while (Babylist::where('invitation_code', $code)->count() > 0);
+
         $babylist = new Babylist;
         $babylist->name = $request->name;
         $babylist->gender = $request->gender;
         $babylist->description = $request->description;
-        $babylist->invitation_code = $request->invite;
+        $babylist->invitation_code = $code;
         $babylist->user_id = $request->user()->id;
         $babylist->articles = json_encode([]);
         $babylist->save();
@@ -160,5 +175,16 @@ class BabylistController extends Controller
         $articles = Article::whereIn('id', $articles)->get();
 
         return view('reserved', compact('articles', 'list', 'order'));
+    }
+
+    public function copy (Request $request, $list) {
+        $copyLink = 'https://babybook.keanovancuyck.be/invitation/list?invitation_code=' . $list->invitation_code;
+        if (App::environment('local')) {
+            $copyLink = 'http://127.0.0.1:8000/invitation/list?invitation_code='. $list->invitation_code;
+        }
+
+
+
+        return redirect()->route('dashboard')->with('success', 'List copied');
     }
 }

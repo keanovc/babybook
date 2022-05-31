@@ -15,6 +15,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/clipboard.min.js') }}"></script>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
@@ -30,4 +31,17 @@
             </main>
         </div>
     </body>
+    <script>
+        var clipboard = new ClipboardJS('.btn');
+
+        clipboard.on('success', function(e) {
+            scrollTo(0, 0);
+            document.querySelector('.copied').classList.remove('hidden');
+            document.querySelector('.copied').classList.add('block');
+            setTimeout(function() {
+                document.querySelector('.copied').classList.remove('block');
+                document.querySelector('.copied').classList.add('hidden');
+            }, 2000);
+        });
+    </script>
 </html>

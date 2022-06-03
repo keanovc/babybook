@@ -60,7 +60,7 @@
                     <h1 class="title">Baby: {{ $list->name }}</h1>
                     <p class="text"><span>Geslacht: </span>{{ $list->gender }}</p>
                     <p class="text"><span>Beschrijving: </span>{{ $list->description }}</p>
-                    <p class="text"><span>Invite code: </span>{{ $list->invitation_code }}</p>
+                    <p class="text"><span>Invite code: </span>https://babybook.keanovancuyck.be/invitation/list?invitation_code={{ $list->invitation_code }}</p>
                 </div>
               <table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='background:#FFFFFF;background-color:#FFFFFF;width:100%;'>
                 <tbody>

@@ -7,15 +7,12 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
                 color: #2C2C2C;
-                font-family: 'Nunito', sans-serif;
+                /* font-family: 'Nunito', sans-serif; */
                 font-weight: 200;
             }
 
@@ -51,8 +48,6 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body class="font-sans antialiased">
         <div>

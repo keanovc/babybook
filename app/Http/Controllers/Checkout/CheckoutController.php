@@ -20,7 +20,7 @@ class CheckoutController extends Controller
         $total = (string) $cart->getTotal();
 
         $order = new Order();
-        $order->list_id = $request->list;
+        $order->babylist_id = $request->list;
         $order->name = $request->name;
         $order->remarks = $request->remarks;
         $order->status = 'pending';
@@ -35,7 +35,7 @@ class CheckoutController extends Controller
 
         $webhookUrl = route('webhooks.mollie');
         if (App::environment('local')) {
-            $webhookUrl = 'https://0d77-2a02-1811-3c2d-b900-6cb2-3c92-d968-3c21.eu.ngrok.io/webhooks/mollie';
+            $webhookUrl = 'https://a5f8-2a02-1811-3c2d-b900-a12a-a12d-f81d-a6b7.eu.ngrok.io/webhooks/mollie';
         }
 
         $total = number_format($total, 2);
@@ -65,7 +65,7 @@ class CheckoutController extends Controller
     }
 
     private function sendMail ($order) {
-        $list = Babylist::find($order->list_id);
+        $list = Babylist::find($order->babylist_id);
 
         $user = User::find($list->user_id);
 

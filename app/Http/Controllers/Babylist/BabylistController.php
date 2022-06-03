@@ -33,7 +33,7 @@ class BabylistController extends Controller
         }
         $articles = Article::whereIn('id', json_decode($list->articles))->get();
 
-        $orders = Order::where('list_id', $list->id)->get();
+        $orders = Order::where('babylist_id', $list->id)->get();
         $reservedArticles = [];
         foreach ($orders as $order) {
             $reservedArticles = array_merge($reservedArticles, json_decode($order->reserved_articles));
@@ -71,6 +71,12 @@ class BabylistController extends Controller
         $currentCategoryTitle = Category::find($currentCategory)->title;
         $currentCategoryShop = Category::find($currentCategory)->shop;
         $articles = Article::where('category_id', $currentCategory)->get();
+
+        $articlesInList = json_decode($list->articles);
+        $articlesInList = Article::whereIn('id', $articlesInList)->get();
+
+        $articles = $articles->diff($articlesInList);
+
 
         $highestPrice = 0;
         foreach ($articles as $article) {
@@ -144,7 +150,7 @@ class BabylistController extends Controller
     }
 
     public function deleteList (Request $request, Babylist $list) {
-        if (count(Order::where('list_id', $list->id)->get()) > 0) {
+        if (count(Order::where('babylist_id', $list->id)->get()) > 0) {
             return redirect()->route('dashboard')->with('error', __('List has orders'));
         } else {
             $list->delete();
@@ -163,7 +169,7 @@ class BabylistController extends Controller
     }
 
     public function orders (Request $request, Babylist $list) {
-        $orders = Order::where('list_id', $list)->get();
+        $orders = Order::where('babylist_id', $list->id)->get();
 
         return view('orders', compact('orders', 'list'));
     }

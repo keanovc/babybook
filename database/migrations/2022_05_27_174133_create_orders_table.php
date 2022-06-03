@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('list_id');
+            $table->foreignId('babylist_id')->constrained();
             $table->string('name');
             $table->text('remarks');
             $table->string('status')->default('pending');

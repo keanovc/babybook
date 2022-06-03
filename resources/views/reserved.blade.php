@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="flex-1 group">
-                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-500 group-hover:text-indigo-500">
+                    <div class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
                         <a href="{{ route('items', $list) }}" class="block px-1 pt-1 pb-1">
                             <span class="material-symbols-outlined">
                                 article

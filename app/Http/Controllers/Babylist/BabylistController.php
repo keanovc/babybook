@@ -15,16 +15,13 @@ class BabylistController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $user = $request->user();
-        $lists = $user->lists;
+        $lists = $request->user()->lists;
 
         return view('dashboard', compact('lists'));
     }
 
-    public function items(Request $request, $list)
+    public function items(Request $request, Babylist $list)
     {
-        $list = Babylist::find($list);
-
         if ($list->user_id != $request->user()->id) {
             return redirect()->route('dashboard')->with('error', __('List not found'));
         }
@@ -52,7 +49,7 @@ class BabylistController extends Controller
         return view('addlist');
     }
 
-    public function additems(Request $request, $list)
+    public function additems(Request $request, Babylist $list)
     {
         $categories = Category::all();
 
@@ -107,7 +104,6 @@ class BabylistController extends Controller
 
     public function storeList(Request $request)
     {
-        // create a random code that is not already in the database
         $code = '';
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         do {
@@ -117,33 +113,37 @@ class BabylistController extends Controller
             }
         } while (Babylist::where('invitation_code', $code)->count() > 0);
 
-        $babylist = new Babylist;
-        $babylist->name = $request->name;
-        $babylist->gender = $request->gender;
-        $babylist->description = $request->description;
-        $babylist->invitation_code = $code;
-        $babylist->user_id = $request->user()->id;
-        $babylist->articles = json_encode([]);
-        $babylist->save();
+        $request->user()->lists()->create([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'description' => $request->description,
+            'articles' => "[]",
+            'invitation_code' => $code,
+        ]);
+
+        // $babylist = new Babylist;
+        // $babylist->name = $request->name;
+        // $babylist->gender = $request->gender;
+        // $babylist->description = $request->description;
+        // $babylist->invitation_code = $code;
+        // $babylist->user_id = $request->user()->id;
+        // $babylist->articles = json_encode([]);
+        // $babylist->save();
 
         return redirect()->route('dashboard')->with('success', __('List created'));
     }
 
-    public function storeItems(Request $request)
+    public function storeItems(Request $request, Babylist $list)
     {
-        $list = $request->list;
-        $listTotal = Babylist::find($request->list);
-        $articles = json_decode($listTotal->articles, true);
+        $articles = json_decode($list->articles, true);
         $articles[] = $request->article;
-        $listTotal->articles = json_encode($articles);
-        $listTotal->save();
-
+        $list->articles = json_encode($articles);
+        $list->save();
 
         return redirect()->route('additems', $list)->with('success', __('Article added'));
     }
 
-    public function deleteList (Request $request, $list) {
-        $list = Babylist::find($list);
+    public function deleteList (Request $request, Babylist $list) {
         if (count(Order::where('list_id', $list->id)->get()) > 0) {
             return redirect()->route('dashboard')->with('error', __('List has orders'));
         } else {
@@ -152,24 +152,23 @@ class BabylistController extends Controller
         }
     }
 
-    public function removeItems(Request $request, $list, $article)
+    public function removeItems(Request $request, Babylist $list, $article)
     {
-        $listTotal = Babylist::find($request->list);
-        $articles = json_decode($listTotal->articles, true);
+        $articles = json_decode($list->articles, true);
         $articles = array_diff($articles, [$article]);
         $articles = array_values($articles);
-        $listTotal->articles = json_encode($articles);
-        $listTotal->save();
+        $list->articles = json_encode($articles);
+        $list->save();
         return redirect()->route('items', $list)->with('success', __('Article removed'));
     }
 
-    public function orders (Request $request, $list) {
+    public function orders (Request $request, Babylist $list) {
         $orders = Order::where('list_id', $list)->get();
 
         return view('orders', compact('orders', 'list'));
     }
 
-    public function reserved(Request $request, $list, $order) {
+    public function reserved(Request $request, Babylist $list, $order) {
         $order = Order::find($order);
         $articles = json_decode($order->reserved_articles);
         $articles = Article::whereIn('id', $articles)->get();

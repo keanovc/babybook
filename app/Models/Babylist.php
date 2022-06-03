@@ -9,6 +9,8 @@ class Babylist extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'user_id', 'articles', 'gender', 'description', 'invitation_code'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

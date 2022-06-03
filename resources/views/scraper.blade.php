@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto w-11/12">
             <div class="bg-white overflow-hidden shadow-sm rounded-lg">
-                <div class="p-6 bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <div class="py-6 bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <form action="{{ route('scraper.categories') }}" method="POST">
                         @csrf
                         <div class="flex flex-wrap m-5">
@@ -30,7 +30,7 @@
                             transition
                             ease-in-out
                             m-0
-                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                            focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none" aria-label="Default select example">
                                 @foreach ($shops as $key => $shop)
                                     <option value="{{ $key }}">{{ $shop }}</option>
                                 @endforeach
@@ -45,8 +45,8 @@
                               <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="url" name="url" type="url" placeholder="e.g. http://bol.com/speelgoed" required>
                             </div>
                         </div>
-                        <div class="flex justify-end">
-                            <button class="bg-blue-500 text-white font-bold py-2 px-4 mt-4 rounded" type="submit">
+                        <div class="flex justify-end pr-8">
+                            <button class="bg-indigo-500 text-white font-bold py-2 px-4 mt-4 rounded" type="submit">
                                 {{ __('Scrape categories') }}
                             </button>
                         </div>
@@ -78,7 +78,7 @@
                                             transition
                                             ease-in-out
                                             m-0
-                                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                            focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none" aria-label="Default select example">
                                                 <option value="">{{ $currentShop }}</option>
                                                 <hr>
                                                 @foreach ($shops as $key => $shop)
@@ -104,7 +104,7 @@
                                                 @csrf
                                                 <input type="hidden" name="url" value="{{ $category->url }}">
                                                 <input type="hidden" name="shop" value="{{ $category->shop }}">
-                                                <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded" type="submit">
+                                                <button class="bg-indigo-500 text-white font-bold py-2 px-4 rounded" type="submit">
                                                     {{ __('Articles') }}
                                                 </button>
                                             </form>

@@ -35,7 +35,7 @@
         </div>
     </x-slot>
 
-    <div class="flex justify-center items-center md:mt-20">
+    <div class="flex justify-center items-center pt-10 md:mt-20">
         <div class="mx-auto w-10/12 md:w-6/12 lg:w-4/12 xl:w-4/12 md:bg-white md:rounded-3xl md:p-10 md:shadow-md">
             <div class="flex items-center justify-between mb-5 px-1">
                 <h1 class="text-xl uppercase font-bold">{{ __('Create list') }}</h1>

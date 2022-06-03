@@ -57,7 +57,7 @@
         </div>
     </x-slot>
 
-    <div class="flex justify-center items-center md:mt-20">
+    <div class="pt-10 flex justify-center items-center md:mt-20">
         <div class="mx-auto w-10/12 md:w-6/12 lg:w-4/12 xl:w-4/12 md:bg-white md:rounded-3xl md:p-10 md:shadow-md">
             <div class="flex items-center justify-between mb-5 px-1">
                 <h1 class="text-xl uppercase font-bold">{{ __('Add articles') }}</h1>
@@ -71,24 +71,10 @@
             <form action="{{ route('additems', $list) }}" method="GET">
                 <div class="flex flex-wrap">
                     <div class="w-full px-3">
-                        <label class="block font-bold uppercase text-gray-700 tracking-wide mb-2">
+                        <label class="block font-bold text-gray-700 tracking-wide mb-2">
                             {{ __('Category') }}
                         </label>
-                        <select name="category" class="form-select appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-1.5
-                        text-base
-                        font-normal
-                        text-gray-700
-                        bg-white bg-clip-padding bg-no-repeat
-                        border border-solid border-gray-300
-                        rounded
-                        transition
-                        ease-in-out
-                        m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                        <select name="category" class="w-full pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" aria-label="Default select example">
                             <option value="">{{ $currentCategoryTitle }} - {{ $currentCategoryShop }}</option>
                             @foreach ($categoriesWithArticles as $category)
                                 <option value="{{ $category->id }}">
@@ -107,14 +93,14 @@
                                 {{ floor(($highestPrice + $lowestPrice) / 2) }}
                             @endif
                         }">
-                            <label for="price" class="font-bold uppercase text-gray-700" x-text="`Price €` + price"></label>
+                            <label for="price" class="font-bold text-gray-700" x-text="`{{ __('Price') }} €` + price"></label>
                             <input type="range" min="{{ $lowestPrice }}" name="price" max="{{ $highestPrice }}" x-model="price"
                             class="w-full h-2 bg-indigo-200 appearance-none" />
                         </div>
                     </div>
                 </div>
                 <div class="w-full px-3">
-                    <button type="submit" class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700 transition duration-500 hover:scale-105 text-white rounded-lg px-3 py-3 font-semibold">Search</button>
+                    <button type="submit" class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700 transition duration-500 hover:scale-105 text-white rounded-lg px-3 py-3 font-semibold">{{ __('Search') }}</button>
                 </div>
             </form>
             <div class="w-full mx-auto mt-10 mb-5">
@@ -137,10 +123,9 @@
                 @foreach ($articlesWithPriceBelowHighest as $article)
                     <div class="bg-white w-full max-w-sm mx-auto my-5 rounded-3xl overflow-hidden mt-5 border shadow-lg">
                         <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('../../img/{{ $article->image }}')">
-                            <form method="POST" action="{{ route('additems.store', $article) }}">
+                            <form method="POST" action="{{ route('additems.store', $list) }}">
                                 @csrf
 
-                                <input type="hidden" name="list" value="{{ $list }}">
                                 <input type="hidden" name="article" value="{{ $article->id }}">
                                 <button type="submit" class="flex px-2 py-2 rounded-full bg-indigo-500 text-white mx-5 -mb-4 hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700 transition duration-500 hover:scale-105">
                                     <span class="material-symbols-outlined">

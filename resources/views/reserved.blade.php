@@ -57,7 +57,7 @@
         </div>
     </x-slot>
 
-    <div class="mx-auto w-10/12 md:w-6/12 lg:w-4/12 xl:w-4/12 bg-white rounded-3xl py-5 md:p-10 md:shadow-md mt-10 md:mt-20">
+    <div class="mx-auto w-11/12 md:w-6/12 lg:w-4/12 xl:w-4/12 bg-white rounded-3xl py-5 md:p-10 md:shadow-md mt-10 md:mt-20">
         <div class="flex justify-end mr-5">
             <a href="{{ route('orders', $list) }}" class="transition duration-500 hover:scale-110">
                 <span class="material-symbols-outlined text-[#1E3A4C]">
@@ -71,7 +71,7 @@
                 <div class="text-left">
                     <p class="text-grey-darker text-lg font-bold uppercase">{{ __('Name') }}: {{ $order->name }}</p>
                     <p class="text-grey-darker text-lg">{{ __('Message') }}: {{ $order->remarks }}</p>
-                    <p class="text-grey-darker text-lg">{{ __('Price') }}: {{ $order->total }}</p>
+                    <p class="text-grey-darker text-lg">{{ __('Price') }}: €{{ $order->total }}</p>
                     <p class="text-grey-darker text-lg">{{ __('Status') }}: {{ $order->status }}</p>
                 </div>
             </div>

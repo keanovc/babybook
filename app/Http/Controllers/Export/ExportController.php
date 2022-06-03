@@ -13,7 +13,7 @@ class ExportController extends Controller
 {
     public function pdf (Request $request, $list) {
         $list = Babylist::find($list);
-        $orders = Order::where('list_id', $list->id)->get();
+        $orders = Order::where('babylist_id', $list->id)->get();
         $reservedArticles = [];
         foreach ($orders as $order) {
             $reservedArticles = array_merge($reservedArticles, json_decode($order->reserved_articles));

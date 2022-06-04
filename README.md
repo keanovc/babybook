@@ -43,11 +43,11 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://babybook.keanovancuyck.be)
 
-## User
+### User
 
 This application is made to make birth lists for babies. You can very easily make a birth list for your baby by using this application. You just need to register and then you will already get the option to create a birth list. Once created, you can add items to your birth list. The birth list also includes a link to your baby's invitation page. With this link, your friends and family can access your baby's birth list. They will then see the different items that are on the birth list. They can then add these to their shopping cart and make a payment. Once the payment is done, they get a success page and the parent gets an email with the reservation. The parents can then also view these reservations in the birth list under reservations of the baby. You can also download the birth list as a PDF. In this PDF you can see the items that have not yet been reserved.
 
-## Admin
+### Admin
 
 Of course, these articles have to come from somewhere and this is what the admin does. The admin can do two things:
 

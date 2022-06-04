@@ -91,7 +91,6 @@ _Below is an example of how you can instruct your audience on installing and set
    npm install
    ```
 3. Fill in the .env file
-   ```
 
 4. Run the server
    ```sh

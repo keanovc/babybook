@@ -62,6 +62,8 @@ This list includes the tools I used to create this application. I used:
 
 * [Laravel](https://laravel.com)
 * [Tailwind](https://tailwindcss.com/)
+* [MySQL](https://www.mysql.com/)
+* [Mollie](https://www.mollie.com/be)
 * [Mail](https://laravel.com/docs/9.x/mail)
 * [Clipboard](https://clipboardjs.com/)
 * [Dompdf](https://github.com/dompdf/dompdf)

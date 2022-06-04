@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-center mt-4">
-                            <a class="text-gray-400 hover:text-gray-300 text-md xl:text-base lg:text-base" href="{{ route('register') }}">
+                            <a class="text-gray-400 hover:text-gray-300 text-center text-md xl:text-base lg:text-base" href="{{ route('register') }}">
                                 {{ __("Don't have an account?") }} {{ __('Sign up here') }}
                             </a>
                         </div>

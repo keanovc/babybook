@@ -52,8 +52,6 @@ class BabylistController extends Controller
     public function additems(Request $request, Babylist $list)
     {
         $categories = Category::all();
-
-        // check which category has articles
         $categoriesWithArticles = [];
         foreach ($categories as $category) {
             $category->articles = Article::where('category_id', $category->id)->get();
@@ -105,7 +103,7 @@ class BabylistController extends Controller
             }
         };
 
-        return view('additems', compact('categoriesWithArticles', 'articlesWithPriceBelowHighest', 'currentCategoryTitle', 'currentCategoryShop', 'highestPrice', 'currentPrice', 'lowestPrice', 'list'));
+        return view('additems', compact('categoriesWithArticles', 'articlesWithPriceBelowHighest', 'currentCategoryTitle', 'currentCategoryShop', 'highestPrice', 'currentPrice', 'lowestPrice', 'list', 'currentCategory'));
     }
 
     public function storeList(Request $request)

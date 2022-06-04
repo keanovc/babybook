@@ -104,7 +104,7 @@
                                     {{ $article->title }}
                                 </h1>
                                 <a href="{{ $article->url }}" target="_blank">
-                                    <span class="text-sm text-indigo-300 hover:text-indigo-500 mt-0 mt-0">{{ __('see article') }}</span>
+                                    <span class="text-sm text-indigo-300 hover:text-indigo-500 mt-0">{{ __('see article') }}</span>
                                 </a>
                                 <div class="flex items-center justify-between mt-5">
                                     <h1 class="font-bold text-gray-500">€{{ $article->price }}</h1>

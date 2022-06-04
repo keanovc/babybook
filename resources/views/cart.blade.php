@@ -95,17 +95,35 @@
                         <dd class="inline">€{{ $cart->getTotal() }}</dd>
                     </div>
                 </dl>
-                <div class="space-y-4 text-center md:w-6/12 md:mx-auto md:mt-20">
+                <div class="space-y-4 md:w-6/12 md:mx-auto md:mt-20">
                     <form action="{{ route('checkout') }}" method="GET">
-                        <input type="text" id="name" name="name" class="bg-gray-50 border-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:indigo-blue-500 block w-full p-2.5" placeholder="{{ __('Name') }}" required>
-                        <textarea id="remarks" name="remarks" rows="4" class="block mt-3 border-none mb-6 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" placeholder="{{ __('Message for the parents') }}..." required></textarea>
+                        <div class="flex -mx-3">
+                            <div class="w-full px-3 mb-5">
+                                <label for="name" class="text-xs font-semibold px-1">{{ __('Name') }}</label>
+                                <div class="flex">
+                                    <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
+                                    <input type="text" id="name" name="name" class="w-full -ml-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="John Doe" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex -mx-3">
+                            <div class="w-full px-3 mb-10">
+                                <label for="description" class="text-xs font-semibold px-1">{{ __('Message') }}</label>
+                                <div class="flex">
+                                    <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i class="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
+                                    <textarea class="w-full -ml-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:blue-indigo-500" id="remarks" type="text" name="remarks" placeholder="{{ __('Message for the parents') }}..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
                         <input type="hidden" name="list" value="{{ $list->id }}">
-                        <button class="block w-full p-3 text-sm rounded-lg bg-indigo-500 text-stone-100 hover:bg-stone-500" type="submit">
-                            {{ __('Check out') }}
-                        </button>
+                        <div class="flex -mx-3">
+                            <div class="w-full px-3 mb-5">
+                                <button type="submit" class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 transition duration-500 hover:scale-105 text-white rounded-lg px-3 py-3 font-semibold">{{ __('Check out') }}</button>
+                            </div>
+                        </div>
                     </form>
 
-                    <form action="{{ route('guestlist') }}" method="GET">
+                    <form class="text-center" action="{{ route('guestlist') }}" method="GET">
                         <input type="hidden" name="invitation_code" value="{{ $invitationCode }}">
                         <button type="submit" class="inline-block text-sm tracking-wide underline underline-offset-4 text-stone-500 hover:text-stone-600">
                             {{ __('Continue shopping') }}

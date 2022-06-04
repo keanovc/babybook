@@ -17,10 +17,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
-    {
-        return view('auth.admin');
-    }
+    // public function create()
+    // {
+    //     return view('auth.admin');
+    // }
 
     public function show(Request $request)
     {

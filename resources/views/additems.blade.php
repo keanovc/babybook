@@ -77,7 +77,11 @@
                         <select name="category" class="w-full pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" aria-label="Default select example">
                             <option value="">{{ $currentCategoryTitle }} - {{ $currentCategoryShop }}</option>
                             @foreach ($categoriesWithArticles as $category)
-                                <option value="{{ request()->query('category') }}">
+                                <option value="{{ $category->id }}"
+                                    @if ($category->id == $currentCategory)
+                                        selected
+                                    @endif
+                                    >
                                     {{ $category->title }} - {{ $category->shop }}
                                 </option>
                             @endforeach

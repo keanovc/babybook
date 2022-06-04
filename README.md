@@ -1,30 +1,4 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -67,18 +41,18 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://babybook.keanovancuyck.be)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+## User
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+This application is made to make birth lists for babies. You can very easily make a birth list for your baby by using this application. You just need to register and then you will already get the option to create a birth list. Once created, you can add items to your birth list. The birth list also includes a link to your baby's invitation page. With this link, your friends and family can access your baby's birth list. They will then see the different items that are on the birth list. They can then add these to their shopping cart and make a payment. Once the payment is done, they get a success page and the parent gets an email with the reservation. The parents can then also view these reservations in the birth list under reservations of the baby. You can also download the birth list as a PDF. In this PDF you can see the items that have not yet been reserved.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+## Admin
 
-Use the `BLANK_README.md` to get started.
+Of course, these articles have to come from somewhere and this is what the admin does. The admin can do two things:
+
+* First, he can scrape different categories coming from three websites: babyplanet, bollebuik and child planet. This will give the admin an overview of the categories that are in them, each with a button to scrape articles.
+* So secondly, he can scrape these categories and see the articles that were in the category. He can then see in the table what price is there and exactly where it came from with a URL to the article. This allows the parents to add these items to their personalized birth list.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

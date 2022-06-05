@@ -77,13 +77,16 @@ class ScraperController extends Controller
         foreach ($categories as $scrapeCategory) {
             $exists = Category::where('url', $scrapeCategory->url)->first();
 
-            if ($exists > 0) continue;
-
-            $categoryEntity = new Category();
-            $categoryEntity->shop = 'babyplanet';
-            $categoryEntity->title = $scrapeCategory->title;
-            $categoryEntity->url = $scrapeCategory->url;
-            $categoryEntity->save();
+            if (!$exists) {
+                $category = new Category();
+                $category->shop = 'babyplanet';
+                $category->title = $scrapeCategory->title;
+                $category->url = $scrapeCategory->url;
+                $category->save();
+            }
+            else {
+                return redirect()->route('scraper.show')->with('error', __('Categories already exists!'));
+            }
         }
 
         return redirect()->route('scraper.show')->with('success', __('Categories scraped!'));
@@ -110,13 +113,16 @@ class ScraperController extends Controller
         foreach ($categories as $scrapeCategory) {
             $exists = Category::where('url', $scrapeCategory->url)->first();
 
-            if ($exists > 0) continue;
-
-            $categoryEntity = new Category();
-            $categoryEntity->shop = 'bollebuik';
-            $categoryEntity->title = $scrapeCategory->title;
-            $categoryEntity->url = $scrapeCategory->url;
-            $categoryEntity->save();
+            if (!$exists) {
+                $category = new Category();
+                $category->shop = 'bollebuik';
+                $category->title = $scrapeCategory->title;
+                $category->url = $scrapeCategory->url;
+                $category->save();
+            }
+            else {
+                return redirect()->route('scraper.show')->with('error', __('Categories already exists!'));
+            }
         }
 
         return redirect()->route('scraper.show')->with('success', __('Categories scraped!'));
@@ -142,13 +148,16 @@ class ScraperController extends Controller
         foreach ($categories as $scrapeCategory) {
             $exists = Category::where('url', $scrapeCategory->url)->first();
 
-            if ($exists > 0) continue;
-
-            $categoryEntity = new Category();
-            $categoryEntity->shop = 'dekinderplaneet';
-            $categoryEntity->title = $scrapeCategory->title;
-            $categoryEntity->url = $scrapeCategory->url;
-            $categoryEntity->save();
+            if (!$exists) {
+                $category = new Category();
+                $category->shop = 'dekinderplaneet';
+                $category->title = $scrapeCategory->title;
+                $category->url = $scrapeCategory->url;
+                $category->save();
+            }
+            else {
+                return redirect()->route('scraper.show')->with('error', __('Categories already exists!'));
+            }
         }
 
         return redirect()->route('scraper.show')->with('success', __('Categories scraped!'));

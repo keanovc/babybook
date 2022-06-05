@@ -54,7 +54,7 @@ class CheckoutController extends Controller
             ],
         ]);
 
-        $this->sendMail($order);
+        // $this->sendMail($order);
 
         // redirect customer to Mollie checkout page
         return redirect($payment->getCheckoutUrl(), 303);

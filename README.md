@@ -28,7 +28,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#author">Author</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -120,7 +120,7 @@ Distributed under the MIT License.
 
 
 <!-- CONTACT -->
-## Contact
+## Author
 
 Keano Van Cuyck - [@keanovancuyck](https://www.linkedin.com/in/keano-van-cuyck-8696441bb/) - keanvanc@student.arteveldehs.be
 

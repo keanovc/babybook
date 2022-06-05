@@ -279,6 +279,7 @@ class ScraperController extends Controller
             } else {
                 $article->price = $node->filter('div.inner-wrap > div > p.special-price span.price')->first()->text();
             }
+            $article->price = str_replace('.', '', $article->price);
             $article->price = str_replace(',', '.', $article->price);
             $article->price = preg_replace('/[^0-9.]+/', '', $article->price);
             $article->url = $node->filter('div.inner-wrap > h3 > a')->first()->attr('href');
@@ -338,6 +339,7 @@ class ScraperController extends Controller
             $article->title = $node->filter('div.product-tile > div.product-info > div.product-description > a > span')->text();
             $article->image = 'https://www.dekinderplaneet.be' . $node->filter('div.product-tile > div.product-img > a > span > img')->first()->attr('src');
             $article->price = $node->filter('div.product-tile > div.product-info > div.product-action > span > span.lbl-price')->first()->text();
+            $article->price = str_replace('.', '', $article->price);
             $article->price = str_replace(',', '.', $article->price);
             $article->price = preg_replace('/[^0-9.]+/', '', $article->price);
             $article->url = 'https://www.dekinderplaneet.be' . $node->filter('div.product-tile > div.product-info > div.product-description > a')->first()->attr('href');

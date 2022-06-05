@@ -17,11 +17,11 @@
                     </div>
                 </div>
                 <div class="flex-1 group">
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" class="block px-1 pt-1 pb-1">
                         @csrf
 
                         <div type="button" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
-                            <button onclick="event.preventDefault(); this.closest('form').submit();" class="block px-1 pt-1 pb-1">
+                            <button onclick="event.preventDefault(); this.closest('form').submit();">
                                 <span class="material-symbols-outlined group-hover:text-indigo-500">
                                     logout
                                 </span>

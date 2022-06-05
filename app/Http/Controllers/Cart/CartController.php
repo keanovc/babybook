@@ -21,9 +21,9 @@ class CartController extends Controller
     public function guestlist (Request $request) {
         $invitationCode = $request->invitation_code;
         $list = Babylist::where('invitation_code', $invitationCode)->first();
-        $orders = Order::where('babylist_id', $list->id)->get();
 
         if ($list) {
+            $orders = Order::where('babylist_id', $list->id)->get();
             $articles = Article::whereIn('id', json_decode($list->articles))->get();
             $reservedArticles = [];
             foreach ($orders as $order) {

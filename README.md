@@ -1,6 +1,5 @@
 <div id="top"></div>
 
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://babybook.keanovancuyck.be">
@@ -10,7 +9,6 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -35,7 +33,6 @@
 
 
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://babybook.keanovancuyck.be)
@@ -76,7 +73,6 @@ This list includes the tools I used to create this application. I used:
 
 
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -120,7 +116,6 @@ To get a local copy up and running follow these simple example steps.
 
 
 
-<!-- CONTACT -->
 ## Author
 
 Keano Van Cuyck - [@keanovancuyck](https://www.linkedin.com/in/keano-van-cuyck-8696441bb/) - keanvanc@student.arteveldehs.be
@@ -129,5 +124,4 @@ Keano Van Cuyck - [@keanovancuyck](https://www.linkedin.com/in/keano-van-cuyck-8
 
 
 
-<!-- MARKDOWN LINKS & IMAGES -->
 [product-screenshot]: public/img/screenshot.png

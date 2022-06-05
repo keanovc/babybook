@@ -84,7 +84,7 @@
                 <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="https://t3.ftcdn.net/jpg/01/28/56/34/360_F_128563455_bGrVZnfDCL0PxH1sU33NpOhGcCc1M7qo.jpg" alt="baby">
                 <h1 class="text-xl text-gray-700"> {{ $list->name }} </h1>
                 <h3 class="text-sm text-gray-400 "> {{ $list->description }} </h3>
-                <button class="btn flex items-center mx-auto mt-5 transition duration-500 hover:scale-105 bg-indigo-600 hover:bg-indigo-800 px-4 py-2 text-gray-100 rounded-full" data-clipboard-text={{ env('APP_ENV') === 'local' ? 'http://127.0.0.1:8000/invitation/list?invitation_code=' . $list->invitation_code  : 'https://babybook.keanovancuyck.be/invitation/list?invitation_code=' . $list->invitation_code }}>
+                <button class="btn flex items-center mx-auto mt-5 transition duration-500 hover:scale-105 bg-indigo-600 hover:bg-indigo-800 px-4 py-2 text-gray-100 rounded-full" data-clipboard-text={{ env('APP_ENV') === 'production' ? 'https://babybook.keanovancuyck.be/invitation/list?invitation_code=' . $list->invitation_code  : 'http://127.0.0.1:8000/invitation/list?invitation_code=' . $list->invitation_code }}>
                     <span class="material-symbols-outlined mr-2">
                         content_copy
                     </span>

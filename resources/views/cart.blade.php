@@ -95,7 +95,7 @@
                         <dd class="inline">€{{ $cart->getTotal() }}</dd>
                     </div>
                 </dl>
-                <div class="space-y-4 md:w-6/12 md:mx-auto md:mt-20">
+                <div class="space-y-4 md:w-8/12 md:mx-auto md:mt-20">
                     <form action="{{ route('checkout') }}" method="GET">
                         <div class="flex -mx-3">
                             <div class="w-full px-3 mb-5">

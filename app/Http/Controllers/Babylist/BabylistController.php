@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Article;
 use App\Models\Babylist;
 use App\Models\Order;
-use Illuminate\Support\Facades\App;
 
 
 class BabylistController extends Controller
@@ -124,15 +123,6 @@ class BabylistController extends Controller
             'articles' => "[]",
             'invitation_code' => $code,
         ]);
-
-        // $babylist = new Babylist;
-        // $babylist->name = $request->name;
-        // $babylist->gender = $request->gender;
-        // $babylist->description = $request->description;
-        // $babylist->invitation_code = $code;
-        // $babylist->user_id = $request->user()->id;
-        // $babylist->articles = json_encode([]);
-        // $babylist->save();
 
         return redirect()->route('dashboard')->with('success', __('List created'));
     }

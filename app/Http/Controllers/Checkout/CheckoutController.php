@@ -54,7 +54,7 @@ class CheckoutController extends Controller
             ],
         ]);
 
-        // Emails sturen werkt maar mijn account wordt telkens geblokkeerd door outlook.
+        // Sending emails works but my account gets blocked by outlook every time.
         // $this->sendMail($order);
 
         // redirect customer to Mollie checkout page

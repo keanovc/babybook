@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Webhook;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Mollie\Laravel\Facades\Mollie;
 use App\Models\Order;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -24,7 +23,6 @@ class WebhookController extends Controller
             $order->status = 'paid';
             $order->save();
 
-            // remove all items from cart
             Cart::session($orderId)->clear();
 
         } elseif ($payment->isOpen()) {

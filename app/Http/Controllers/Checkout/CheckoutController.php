@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         $payment = Mollie::api()->payments->create([
             "amount" => [
                 "currency" => "EUR",
-                "value" => $total // You must send the correct number of decimals, thus we enforce the use of strings
+                "value" => $total
             ],
             "description" => "Bestelling op " . date('d-m-Y H:i:s'),
             "redirectUrl" => route('checkout.success'),
@@ -54,6 +54,7 @@ class CheckoutController extends Controller
             ],
         ]);
 
+        // Emails sturen werkt maar mijn account wordt telkens geblokkeerd door outlook.
         // $this->sendMail($order);
 
         // redirect customer to Mollie checkout page

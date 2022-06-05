@@ -28,7 +28,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#license">License</a></li>
     <li><a href="#author">Author</a></li>
   </ol>
 </details>
@@ -111,15 +110,6 @@ To get a local copy up and running follow these simple example steps.
      ./ngrok http http://127.0.0.1:8000
     ```
 
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

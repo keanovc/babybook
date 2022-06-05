@@ -87,15 +87,20 @@ To get a local copy up and running follow these simple example steps.
 2. Install NPM packages
    ```sh
    npm install
-   ```
-3. Fill in the .env file
 
-4. Run the server
+3. Install composer packages
+    ```sh
+    composer install
+    ```
+
+4. Fill in the .env file
+
+5. Run the server
    ```sh
     php artisan serve
     ```
 
-5. If you want to check the mollie local
+6. If you want to check the mollie local
     ```sh
      ./ngrok http http://127.0.0.1:8000
     ```

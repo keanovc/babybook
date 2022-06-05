@@ -17,6 +17,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#website-url">Website URL</a></li>
         <li><a href="#user">User</a></li>
         <li><a href="#admin">Admin</a></li>
         <li><a href="#built-with">Built With</a></li>
@@ -39,7 +40,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://babybook.keanovancuyck.be)
 
-### Link to the project
+### Website URL
 
 [babybook.keanovancuyck.be](https://babybook.keanovancuyck.be)
     

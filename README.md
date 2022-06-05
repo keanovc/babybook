@@ -84,23 +84,29 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    git clone https://github.com/gdmgent-webdev2/werkstuk---geboortelijst-keanovc.git
    ```
-2. Install NPM packages
+2. Change to the directory
+    ```sh
+    cd werkstuk---geboortelijst-keanovc
+    ```
+
+3. Install NPM packages
    ```sh
    npm install
+    ```
 
-3. Install composer packages
+4. Install composer packages
     ```sh
     composer install
     ```
 
-4. Fill in the .env file
+5. Fill in the .env file
 
-5. Run the server
+6. Run the server
    ```sh
     php artisan serve
     ```
 
-6. If you want to check the mollie local
+7. If you want to check the mollie local
     ```sh
      ./ngrok http http://127.0.0.1:8000
     ```

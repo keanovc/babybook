@@ -86,7 +86,7 @@ class ScraperController extends Controller
             $categoryEntity->save();
         }
 
-        return redirect()->route('scraper.show');
+        return redirect()->route('scraper.show')->with('success', 'Categories scraped!');
     }
 
     private function scrapeBollebuikCategories($url)
@@ -119,7 +119,7 @@ class ScraperController extends Controller
             $categoryEntity->save();
         }
 
-        return redirect()->route('scraper.show');
+        return redirect()->route('scraper.show')->with('success', 'Categories scraped!');
     }
 
     private function scrapeDeKinderPlaneetCategories($url)
@@ -151,7 +151,7 @@ class ScraperController extends Controller
             $categoryEntity->save();
         }
 
-        return redirect()->route('scraper.show');
+        return redirect()->route('scraper.show')->with('success', 'Categories scraped!');
     }
 
     public function scrapeArticles(Request $request)
@@ -197,7 +197,7 @@ class ScraperController extends Controller
             $articleEntity->save();
         }
 
-        return redirect()->route('adminDashboard');
+        return redirect()->route('adminDashboard')->with('success', 'Articles scraped!');
     }
 
     private function scrapeBabyPlanetPageData($crawler)
@@ -256,7 +256,7 @@ class ScraperController extends Controller
             $articleEntity->save();
         }
 
-        return redirect()->route('adminDashboard');
+        return redirect()->route('adminDashboard')->with('success', 'Articles scraped!');
     }
 
     private function scrapeBollebuikPageData($crawler)
@@ -319,7 +319,7 @@ class ScraperController extends Controller
             $articleEntity->save();
         }
 
-        return redirect()->route('adminDashboard');
+        return redirect()->route('adminDashboard')->with('success', 'Articles scraped!');
     }
 
     private function scrapeDeKinderPlaneetPageData($crawler)

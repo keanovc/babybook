@@ -68,17 +68,6 @@
                 </div>
             </div>
         </div>
-    @elseif (session('error'))
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 2000)">
-            <div class="z-10 absolute top-24 left-1/2 transform -translate-x-1/2 text-[#1E3A4C] md:w-4/12 w-11/12">
-                <div class="shadow-lg bg-red-100 rounded-lg py-5 px-6 mb-3 text-base text-red-700 inline-flex items-center w-full" role="alert">
-                    <span class="material-symbols-outlined mr-2">
-                        error
-                    </span>
-                    {{ session('error') }}
-                </div>
-            </div>
-        </div>
     @endif
 
     <div class="pt-10 text-[#1E3A4C]">

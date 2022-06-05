@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Babylist;
 use App\Models\Order;
 
+use function PHPUnit\Framework\isEmpty;
 
 class BabylistController extends Controller
 {
@@ -51,6 +52,11 @@ class BabylistController extends Controller
     public function additems(Request $request, Babylist $list)
     {
         $categories = Category::all();
+
+        if (isEmpty($categories)) {
+            return redirect()->route('items', compact('list'))->with('error', __('No categories found!'));
+        }
+
         $categoriesWithArticles = [];
         foreach ($categories as $category) {
             $category->articles = Article::where('category_id', $category->id)->get();
